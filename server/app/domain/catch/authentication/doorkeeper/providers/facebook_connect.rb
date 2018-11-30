@@ -12,17 +12,17 @@ module Catch
           end
 
           def resource_owner
-            @resource_owner ||= User.where(
-              facebook_id: me[:id]
-            ).first_or_create! do |user|
-              user.assign_attributes(
-                facebook_id:    me[:id],
-                facebook_data:  me
-              )
-            end
+            @resource_owner ||= fetch_resource_owner
           end
 
           private
+
+          def fetch_resource_owner
+            User.fetch_by_facebook_id(me[:id]) || User.create!(
+              facebook_id: me[:id],
+              facebook_data: me
+            )
+          end
 
           def me
             @me ||= fb.get_object(:me, fields: FIELDS).with_indifferent_access

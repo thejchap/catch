@@ -1,10 +1,7 @@
 import { inject as service } from '@ember/service';
 import { run } from '@ember/runloop';
 import { isEmpty } from '@ember/utils';
-import {
-  merge,
-  assign as emberAssign
-} from '@ember/polyfills';
+import { merge, assign as emberAssign } from '@ember/polyfills';
 import { Promise } from 'rsvp';
 import Oauth2PasswordGrant from 'ember-simple-auth/authenticators/oauth2-password-grant';
 

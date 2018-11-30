@@ -13,6 +13,10 @@ gem 'bootsnap', '1.3.2', require: false
 gem 'doorkeeper', '5.0.2'
 gem 'doorkeeper-grants_assertion', '0.2.0'
 gem 'koala', '3.0.0'
+gem 'identity_cache'
+gem 'dalli'
+gem 'cityhash'
+gem 'jsonb_accessor'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

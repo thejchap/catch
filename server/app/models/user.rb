@@ -10,8 +10,16 @@
 #
 
 class User < ApplicationRecord
+  include IdentityCache
+  cache_index :facebook_id, unique: true
+
   has_many :access_tokens,
-           class_name: 'Doorkeeper::AccessToken',
-           foreign_key: :resource_owner_id,
-           dependent: :delete_all
+    class_name: 'Doorkeeper::AccessToken',
+    foreign_key: :resource_owner_id,
+    dependent: :delete_all
+
+  jsonb_accessor :facebook_data,
+    email: :string,
+    first_name: :string,
+    last_name: :string
 end
