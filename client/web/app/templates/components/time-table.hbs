@@ -1,0 +1,7 @@
+{{#time-table/table as |day table|}}
+  <ul class="occurrences">
+    {{#each day.occurrences as |occurrence|}}
+      {{time-table/table/occurrence model=occurrence}}
+    {{/each}}
+  </ul>
+{{/time-table/table}}

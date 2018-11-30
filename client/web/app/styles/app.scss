@@ -1,3 +1,14 @@
 $body-bg: #f4f4f4;
 
 @import 'ember-cli-bootstrap-4/bootstrap';
+
+.no-gutters {
+  margin-right: 0;
+  margin-left: 0;
+
+  > .col,
+  > [class*="col-"] {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}

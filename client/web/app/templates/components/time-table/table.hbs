@@ -1,0 +1,7 @@
+{{#each days as |day|}}
+  {{day.index}}
+{{/each}}
+
+{{#time-table/table/content model=model as |day|}}
+  {{yield day this}}
+{{/time-table/table/content}}

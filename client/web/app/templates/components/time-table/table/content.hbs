@@ -1,0 +1,7 @@
+{{#each timeSlots as |slot|}}
+  {{slot.start}}
+{{/each}}
+
+{{#each days as |day index|}}
+  {{yield day this}}
+{{/each}}
