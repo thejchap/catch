@@ -4,7 +4,10 @@ import UnauthenticatedRouteMixin from 'ember-simple-auth/mixins/unauthenticated-
 export default Route.extend(UnauthenticatedRouteMixin, {
   actions: {
     authenticateWithFacebook() {
-      this.get('session').authenticate('authenticator:torii', 'facebook');
+      this.get('session').authenticate(
+        'authenticator:oauth2-assertion-grant-torii',
+        'facebook-connect'
+      );
     },
   }
 });
