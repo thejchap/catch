@@ -1,20 +1,37 @@
-<div class="row no-gutters">
-  <div class="col-2">
+<div class='row no-gutters time-table-header border-bottom'>
+  <div class='time-table-header-col time-table-first-col'>
   </div>
-  <div class="col">
-    <div class="row no-gutters">
-      {{#each days as |day|}}
-        <div class="col border">
-          {{day.index}}
+  {{#each days as |day|}}
+    <div class='col border-left d-flex time-table-header-col'>
+      <div class="d-flex p-2 align-items-center">
+        <div>
+          {{day.label}}
         </div>
-      {{/each}}
-    </div>
-    <div class="row no-gutters">
-      <div class="col">
-        {{#time-table/table/content model=model as |day|}}
-          {{yield day this}}
-        {{/time-table/table/content}}
       </div>
     </div>
+  {{/each}}
+  <div class='scroll-pad'></div>
+</div>
+
+<div class="time-table-content-wrapper">
+  <div class="time-table-content row no-gutters">
+  <div class='time-table-first-col'>
+    {{#each labeledTimeSlots as |timeSlot|}}
+      <div style={{timeSlotLabelStyle}} class='border-bottom p-2 d-flex justify-content-end align-items-center'>
+        <div>
+          {{timeSlot.start}}
+        </div>
+      </div>
+    {{/each}}
+  </div>
+  {{#each days as |day|}}
+    <div class='col border-left'>
+      {{#each timeSlots as |timeSlot|}}
+        <div style={{timeSlotStyle}}  class='border-bottom'></div>
+      {{/each}}
+
+      {{yield day}}
+    </div>
+  {{/each}}
   </div>
 </div>

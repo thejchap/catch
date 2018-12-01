@@ -1,4 +1,4 @@
-$body-bg: #f4f4f4;
+//$body-bg: #f4f4f4;
 
 @import 'ember-cli-bootstrap-4/bootstrap';
 
@@ -10,5 +10,41 @@ $body-bg: #f4f4f4;
   > [class*="col-"] {
     padding-right: 0;
     padding-left: 0;
+  }
+}
+
+.time-table {
+  flex: 1;
+  height: 100%;
+
+  .time-table-table {
+    flex: 1;
+  }
+
+  .time-table-header {
+    flex: none;
+    height: 50px;
+
+    .time-table-header-col {
+      overflow: hidden;
+    }
+  }
+
+  .time-table-first-col {
+    width: 60px;
+    overflow: hidden;
+  }
+
+  .time-table-content-wrapper {
+    flex: 1;
+    overflow-y: scroll;
+  }
+
+  .scroll-pad {
+    overflow-y: scroll;
+  }
+
+  .time-table-content {
+    flex: 1;
   }
 }

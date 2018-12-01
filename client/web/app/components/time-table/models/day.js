@@ -2,9 +2,21 @@ import Object, { computed } from '@ember/object';
 import { A } from '@ember/array';
 
 const { alias } = computed;
+const LABELS = [
+  'Sun',
+  'Mon',
+  'Tue',
+  'Wed',
+  'Thu',
+  'Fri',
+  'Sat'
+];
 
 const Day = Object.extend({
-  occurrences: alias('calendar.occurrences')
+  occurrences: alias('calendar.occurrences'),
+  label: computed('index', function() {
+    return LABELS[this.index];
+  })
 });
 
 Day.reopenClass({
