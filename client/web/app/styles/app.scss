@@ -35,6 +35,12 @@
     overflow: hidden;
   }
 
+  .time-table-occurrence {
+    width: 100%;
+    position: absolute;
+    background: #f1f1f1;
+  }
+
   .time-table-content-wrapper {
     flex: 1;
     overflow-y: scroll;

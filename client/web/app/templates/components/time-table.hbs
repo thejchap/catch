@@ -1,5 +1,5 @@
-{{#time-table/table timeSlotHeight=timeSlotHeight as |day table|}}
+{{#time-table/table occurrences=occurrences timeSlotHeight=timeSlotHeight as |day table|}}
   {{#each day.occurrences as |occurrence|}}
-    {{time-table/table/occurrence model=occurrence}}
+    {{time-table/table/occurrence model=occurrence timeSlotHeight=timeSlotHeight}}
   {{/each}}
 {{/time-table/table}}
