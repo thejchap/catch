@@ -1,4 +1,8 @@
-{{#time-table/table occurrences=occurrences timeSlotHeight=timeSlotHeight as |day table|}}
+{{#time-table/table
+  onSelectTimeSlot=(action "addOccurrence")
+  model=model
+  timeSlotHeight=timeSlotHeight as |day table|}}
+
   {{#each day.occurrences as |occurrence|}}
     {{time-table/table/occurrence
       model=occurrence
@@ -10,9 +14,11 @@
 
   {{#if day.occurrencePreview}}
     {{time-table/table/occurrence
+      class='time-table-occurrence-preview'
       model=day.occurrencePreview
       timeSlotHeight=timeSlotHeight
       timeSlotDuration=timeSlotDuration
       table=table}}
   {{/if}}
+
 {{/time-table/table}}

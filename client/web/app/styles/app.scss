@@ -37,14 +37,18 @@
 
   .time-table-occurrence {
     @extend .p-1;
+    @extend .rounded;
     width: 100%;
     position: absolute;
     background: $primary;
     color:$white;
-    border-radius: 1px;
 
     &.is-interacting {
       opacity: 0.4;
+    }
+
+    &.time-table-occurrence-preview {
+      @extend .shadow;
     }
   }
 

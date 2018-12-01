@@ -44,6 +44,9 @@ export default Component.extend({
       onend:    (event) => { run(this, this._dragEnd,   event); }
     });
   },
+  click() {
+    alert('test');
+  },
   _dragStart(event) {
     const $el = this.$();
     const $ref = $(this.referenceElement);
@@ -58,7 +61,7 @@ export default Component.extend({
   },
   _dragEnd(event) {
     const { model, preview: { content: { startsAt, endsAt, day } } } = this
-    this.attrs.onUpdate(model, { startsAt, endsAt, day }, false);
+    this.attrs.onUpdate(model.content, { startsAt, endsAt, day }, false);
 
     setProperties(this, {
       isInteracting: false,

@@ -13,7 +13,7 @@ const LABELS = [
 ];
 
 const Day = Object.extend({
-  occurrences: computed('calendar.occurrences.@each.startsAt', function() {
+  occurrences: computed('calendar.occurrences.@each.day', function() {
     const { index } = this;
 
     return this.calendar.occurrences.filter((occurrence) => {

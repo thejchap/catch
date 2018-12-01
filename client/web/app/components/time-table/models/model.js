@@ -1,6 +1,7 @@
 import Object, { computed } from '@ember/object';
 import Day from './day';
 import TimeSlot from './time-slot';
+import { merge } from '@ember/polyfills';
 import OccurrenceProxy from './occurrence-proxy';
 import { A } from '@ember/array';
 
@@ -19,5 +20,13 @@ export default Object.extend({
     });
 
     return proxies;
-  })
+  }),
+  createOccurrence(attrs) {
+    const content = merge({ endsAt: attrs.startsAt + 30 }, attrs);
+
+    return OccurrenceProxy.create({
+      calendar: this,
+      content: Object.create(content)
+    });
+  },
 });

@@ -27,7 +27,7 @@
     {{#each days as |day|}}
       <div class='col border-left'>
         {{#each timeSlots as |timeSlot|}}
-          <div style={{timeSlotStyle}}  class='border-bottom'></div>
+          <div style={{timeSlotStyle}}  class='border-bottom available-time-slot'></div>
         {{/each}}
 
         {{yield day this}}
