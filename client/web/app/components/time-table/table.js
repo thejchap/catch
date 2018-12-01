@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import { computed } from '@ember/object';
+import { computed, set } from '@ember/object';
 import Model from './models/model';
 import { htmlSafe } from '@ember/string';
 
@@ -20,6 +20,9 @@ export default Component.extend({
   }),
   init() {
     this._super(...arguments);
-    this.model = Model.create({ component: this });
+    set(this, 'model', Model.create({ component: this }));
+  },
+  didInsertElement() {
+    set(this, 'referenceElement', this.$('#time-table-content'));
   }
 });
