@@ -13,7 +13,23 @@ const LABELS = [
 ];
 
 const Day = Object.extend({
-  occurrences: alias('calendar.occurrences'),
+  occurrences: computed('calendar.occurrences.@each.startsAt', function() {
+    const { index } = this;
+
+    return this.calendar.occurrences.filter((occurrence) => {
+      const { day } = occurrence;
+      return day == index;
+    });
+  }),
+  occurrencePreview: computed('calendar.occurrencePreview.day', function() {
+    const preview = this.calendar.occurrencePreview;
+
+    if (!preview || preview.day !== this.index) {
+      return;
+    }
+
+    return preview;
+  }),
   label: computed('index', function() {
     return LABELS[this.index];
   })

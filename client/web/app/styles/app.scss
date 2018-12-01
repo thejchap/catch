@@ -36,18 +36,22 @@
   }
 
   .time-table-occurrence {
+    @extend .p-1;
     width: 100%;
     position: absolute;
-    background: #f1f1f1;
+    background: $primary;
+    color:$white;
+    border-radius: 1px;
 
     &.is-interacting {
-      background: red;
+      opacity: 0.4;
     }
   }
 
   .time-table-content-wrapper {
     flex: 1;
     overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
   }
 
   .scroll-pad {

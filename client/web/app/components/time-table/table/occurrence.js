@@ -12,9 +12,16 @@ export default Component.extend({
   attributeBindings: ['style'],
   classNameBindings: ['isInteracting'],
   calendar: reads('model.calendar'),
+  day: reads('model.day'),
   referenceElement: reads('table.referenceElement'),
+  firstColWidth() {
+    return $('.time-table-first-col:first').outerWidth();
+  },
+  dayWidth() {
+    return $('.time-table-day-col:first').outerWidth();
+  },
   preview: reads('calendar.occurrencePreview'),
-  top: computed('startTime', 'timeSlotHeight', function() {
+  top: computed('model.startsAt', 'timeSlotHeight', function() {
     return (this.model.startsAt / 30) * this.timeSlotHeight;
   }),
   height: computed('duration', 'timeSlotHeight', function() {
@@ -50,11 +57,56 @@ export default Component.extend({
     });
   },
   _dragEnd(event) {
-    set(this, 'isInteracting', false);
+    const { model, preview: { content: { startsAt, endsAt, day } } } = this
+    this.attrs.onUpdate(model, { startsAt, endsAt, day }, false);
+
+    setProperties(this, {
+      isInteracting: false,
+      dragVerticalOffset: null,
+      dragTopDistance: null,
+      dragBottomDistance: null,
+      'calendar.occurrencePreview': null
+    });
   },
   _dragMove(event) {
     set(this, 'dragVerticalOffset', this.dragVerticalOffset + event.dy);
 
-    console.log(this.dragVerticalOffset);
+    const dragTimeSlotOffset = this._dragTimeSlotOffset();
+    const dragDayOffset = this._dragDayOffset(event);
+    const startsAt = this.model.startsAt + dragTimeSlotOffset;
+    const endsAt = startsAt + this.model.duration;
+    const day = Math.max(Math.min(this.model.day + dragDayOffset, 6), 0);
+
+    this._updatePreview({ startsAt, endsAt, day });
+  },
+  _updatePreview(attrs) {
+    if (!this._validatePreviewChanges(attrs)) {
+      return;
+    }
+
+    this.attrs.onUpdate(this.preview.content, attrs, true);
+  },
+  _validatePreviewChanges(attrs) {
+    return true;
+  },
+  _dragDayOffset(event) {
+    const $ref = $(this.referenceElement);
+    const offsetX = this._clamp(event.pageX - $ref.offset().left - this.firstColWidth(), 0, $ref.width() - 1);
+    const result = Math.floor(offsetX / this.dayWidth()) - this.day;
+    return result;
+  },
+  _dragTimeSlotOffset() {
+    const verticalDrag = this._clamp(
+      this.dragVerticalOffset,
+      this.dragTopDistance,
+      this.dragBottomDistance
+    );
+
+    const offset = Math.floor(verticalDrag / this.timeSlotHeight);
+    const result = offset * this.timeSlotDuration;
+    return result;
+  },
+  _clamp(number, min, max) {
+    return Math.max(min, Math.min(number, max));
   }
 });

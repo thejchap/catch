@@ -2,7 +2,7 @@
   <div class='time-table-header-col time-table-first-col'>
   </div>
   {{#each days as |day|}}
-    <div class='col border-left d-flex time-table-header-col'>
+    <div class='col border-left d-flex time-table-header-col time-table-day-col'>
       <div class="d-flex p-2 align-items-center">
         <div>
           {{day.label}}
@@ -29,6 +29,7 @@
         {{#each timeSlots as |timeSlot|}}
           <div style={{timeSlotStyle}}  class='border-bottom'></div>
         {{/each}}
+
         {{yield day this}}
       </div>
     {{/each}}

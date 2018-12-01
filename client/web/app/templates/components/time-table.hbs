@@ -3,6 +3,16 @@
     {{time-table/table/occurrence
       model=occurrence
       timeSlotHeight=timeSlotHeight
+      timeSlotDuration=timeSlotDuration
+      onUpdate=(action this.attrs.onUpdateOccurrence)
       table=table}}
   {{/each}}
+
+  {{#if day.occurrencePreview}}
+    {{time-table/table/occurrence
+      model=day.occurrencePreview
+      timeSlotHeight=timeSlotHeight
+      timeSlotDuration=timeSlotDuration
+      table=table}}
+  {{/if}}
 {{/time-table/table}}

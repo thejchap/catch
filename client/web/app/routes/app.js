@@ -4,6 +4,6 @@ import { A } from '@ember/array';
 
 export default Route.extend(AuthenticatedRouteMixin, {
   model() {
-    return A([{ id: 1, startsAt: 30, endsAt: 90 }]);
+    return A([{ id: 1, startsAt: 30, endsAt: 90, day: 2 }]);
   }
 });

@@ -1,3 +1,5 @@
 <div style='height:100vh;'>
-  {{time-table occurrences=model}}
+  {{time-table
+    occurrences=model
+    onUpdateOccurrence=(action 'calendarUpdateOccurrence')}}
 </div>
