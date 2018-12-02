@@ -30,11 +30,11 @@ export default Component.extend({
   _setupInteractionListeners() {
     this.$('#time-table-content').click(this._contentClicked.bind(this));
     const interactable = interact(this.$('#time-table-content')[0]);
-
-    // TODO
-    // this._setupDragHandler(interactable);
+    this._setupDragHandler(interactable);
   },
   _setupDragHandler(interactable) {
+    return;
+
     interactable.draggable({
       ignoreFrom:   '.time-table-occurrence',
       hold:         1000,
@@ -44,7 +44,6 @@ export default Component.extend({
     });
   },
 
-  // TODO
   _dragStart(event) {
     this.attrs.onSelectTimeSlot(60, 1);
   },
@@ -70,7 +69,6 @@ export default Component.extend({
     const day = Math.floor(offsetX / this.dayWidth());
     const timeSlotIndex = Math.floor(offsetY / this.timeSlotHeight);
     const timeSlot = this.timeSlots.objectAt(timeSlotIndex);
-
     this.attrs.onSelectTimeSlot(timeSlot.time, day);
   }
 });

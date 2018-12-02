@@ -23,21 +23,35 @@
 
   .time-table-header {
     flex: none;
-    height: 50px;
+    height: 30px;
 
     .time-table-header-col {
       overflow: hidden;
     }
+    .time-table-day-col {
+      color: gray("500");
+    }
   }
 
   .time-table-first-col {
-    width: 60px;
+    width: 50px;
     overflow: hidden;
+  }
+
+  .time-table-occurrence-label {
+    font-size: 0.7rem;
+  }
+
+  .time-slot-label {
+    small {
+      margin-top: -10px;
+      font-size: 0.7rem;
+    }
   }
 
   .time-table-occurrence {
     @extend .p-1;
-    @extend .rounded;
+    border-radius: 2px;
     width: 100%;
     position: absolute;
     background: $primary;
@@ -49,6 +63,15 @@
 
     &.time-table-occurrence-preview {
       @extend .shadow;
+    }
+
+    .time-table-occurrence-resize-handle {
+      bottom: 0;
+      cursor: ns-resize;
+      height: 8px;
+      left: 0;
+      position: absolute;
+      right: 0;
     }
   }
 

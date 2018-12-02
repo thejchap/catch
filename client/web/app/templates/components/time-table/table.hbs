@@ -16,18 +16,21 @@
 <div class="time-table-content-wrapper">
   <div class="time-table-content row no-gutters" id='time-table-content'>
     <div class='time-table-first-col'>
-      {{#each labeledTimeSlots as |timeSlot|}}
-        <div style={{timeSlotLabelStyle}} class='border-bottom p-2 d-flex justify-content-end align-items-center'>
-          <div>
-            {{timeSlot.start}}
-          </div>
+      {{#each labeledTimeSlots as |timeSlot index|}}
+        <div style={{timeSlotLabelStyle}} class='pr-2 pt-0 d-flex
+          justify-content-end align-items-start time-slot-label'>
+          {{#unless timeSlot.isZero}}
+            <small>
+              {{timeSlot.label}}
+            </small>
+          {{/unless}}
         </div>
       {{/each}}
     </div>
     {{#each days as |day|}}
       <div class='col border-left'>
         {{#each timeSlots as |timeSlot|}}
-          <div style={{timeSlotStyle}}  class='border-bottom available-time-slot'></div>
+        <div style={{timeSlotStyle}}  class='{{if timeSlot.isHour "border-top"}} available-time-slot'></div>
         {{/each}}
 
         {{yield day this}}

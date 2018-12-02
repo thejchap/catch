@@ -22,7 +22,7 @@ export default Object.extend({
     return proxies;
   }),
   createOccurrence(attrs) {
-    const content = merge({ endsAt: attrs.startsAt + 30 }, attrs);
+    const content = merge({ endsAt: attrs.startsAt + 120 }, attrs);
 
     return OccurrenceProxy.create({
       calendar: this,

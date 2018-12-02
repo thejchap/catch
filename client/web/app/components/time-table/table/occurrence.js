@@ -4,6 +4,7 @@ import { htmlSafe } from '@ember/string';
 import { run } from '@ember/runloop';
 import $ from 'jquery';
 import interact from 'interactjs'
+import moment from 'moment';
 
 const { reads } = computed;
 
@@ -12,8 +13,17 @@ export default Component.extend({
   attributeBindings: ['style'],
   classNameBindings: ['isInteracting'],
   calendar: reads('model.calendar'),
+  startsAt: reads('model.startsAt'),
+  endsAt: reads('model.endsAt'),
   day: reads('model.day'),
+  duration: reads('model.duration'),
   referenceElement: reads('table.referenceElement'),
+  endsAtLabel: computed('endsAt', function() {
+    return moment().startOf('day').add(this.endsAt, 'minutes').format('ha');
+  }),
+  startsAtLabel: computed('startsAt', function() {
+    return moment().startOf('day').add(this.startsAt, 'minutes').format('ha');
+  }),
   firstColWidth() {
     return $('.time-table-first-col:first').outerWidth();
   },
@@ -25,17 +35,29 @@ export default Component.extend({
     return (this.model.startsAt / 30) * this.timeSlotHeight;
   }),
   height: computed('duration', 'timeSlotHeight', function() {
-    return this.timeSlotHeight * (this.model.duration / 30);
+    return this.timeSlotHeight * (this.duration / 30);
   }),
-  style: computed('top', function() {
+  style: computed('top', 'height', function() {
     return htmlSafe(`top: ${this.top}px; height: ${this.height}px`);
   }),
   didInsertElement() {
     this._setupInteractions();
   },
   _setupInteractions() {
-    const interactable = interact(this.$()[0]);
+    const interactable = interact(this.$()[0]).on('mouseup', (event) => {
+      run(this, this._mouseUp, event);
+    });
+
     this._setupDragHandler(interactable);
+    this._setupResizeHandler(interactable);
+  },
+  _setupResizeHandler(interactable) {
+    interactable.resizable({
+      edges:   { bottom: '.time-table-occurrence-resize-handle' },
+      onstart: (event) => { run(this, this._resizeStart, event); },
+      onmove:  (event) => { run(this, this._resizeMove,  event); },
+      onend:   (event) => { run(this, this._resizeEnd,   event); }
+    });
   },
   _setupDragHandler(interactable) {
     interactable.draggable({
@@ -44,8 +66,30 @@ export default Component.extend({
       onend:    (event) => { run(this, this._dragEnd,   event); }
     });
   },
-  click() {
-    alert('test');
+  _mouseUp() {
+    $(document.documentElement).css('cursor', '');
+  },
+  _resizeStart(event) {
+    setProperties(this, {
+      isInteracting: true,
+      'calendar.occurrencePreview': this.model.copy()
+    });
+  },
+  _resizeMove(event) {
+    const newDuration = Math.floor(event.rect.height / this.timeSlotHeight) *
+      this.timeSlotDuration;
+    const changes = { endsAt: this.model.startsAt + newDuration };
+    this._updatePreview(changes);
+  },
+  _resizeEnd(event) {
+    this.attrs.onUpdate(this.model.content, {
+      endsAt: this.preview.content.endsAt
+    }, false);
+
+    setProperties(this, {
+      isInteracting: false,
+      'calendar.occurrencePreview': null
+    });
   },
   _dragStart(event) {
     const $el = this.$();

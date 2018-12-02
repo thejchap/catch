@@ -4,7 +4,7 @@ import { set } from '@ember/object';
 
 export default Component.extend({
   classNames: ['time-table', 'd-flex', 'flex-column'],
-  timeSlotHeight: 30,
+  timeSlotHeight: 20,
   timeSlotDuration: 30,
   init() {
     this._super(...arguments);
