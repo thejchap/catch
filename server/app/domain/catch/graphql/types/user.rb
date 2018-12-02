@@ -6,6 +6,7 @@ module Catch
         field :first_name, String, null: true
         field :last_name, String, null: true
         field :facebook_id, String, null: true
+        field :picture_url, String, null: true
       end
     end
   end

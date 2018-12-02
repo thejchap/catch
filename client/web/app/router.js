@@ -8,7 +8,13 @@ const Router = EmberRouter.extend({
 
 Router.map(function() {
   this.route('login');
-  this.route('app');
+  this.route('app', function() {
+    this.route('schedule', function () {
+      this.route('show', { path: '/:id' });
+    });
+    this.route('activities');
+    this.route('location');
+  });
 });
 
 export default Router;

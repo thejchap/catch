@@ -21,5 +21,10 @@ class User < ApplicationRecord
   jsonb_accessor :facebook_data,
     email: :string,
     first_name: :string,
-    last_name: :string
+    last_name: :string,
+    picture: :json
+
+  def picture_url
+    picture.dig 'data', 'url'
+  end
 end

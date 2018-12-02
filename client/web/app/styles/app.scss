@@ -1,4 +1,8 @@
-//$body-bg: #f4f4f4;
+@import url('https://fonts.googleapis.com/css?family=PT+Sans');
+
+$body-bg: #f9fbfd;
+$font-family-base: 'PT Sans', sans-serif;
+$primary: #dd052b;
 
 @import 'ember-cli-bootstrap-4/bootstrap';
 
@@ -11,6 +15,59 @@
     padding-right: 0;
     padding-left: 0;
   }
+}
+
+.feather {
+  width: 17px;
+  height: 17px;
+  vertical-align: text-bottom;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  padding: 0;
+}
+
+.schedule-index {
+  height: 100vh;
+}
+
+.sidebar-sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  height: 100vh;
+  padding-top: .5rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.sidebar .nav-link {
+  font-weight: 500;
+  color: #333;
+  border-left: 4px solid transparent;
+}
+
+.sidebar .nav-link .feather {
+  margin-right: 4px;
+  color: gray("500");
+}
+
+.sidebar .nav-link.active {
+  color: $primary;
+  border-left: 4px solid $primary;
+}
+
+.sidebar .nav-link:hover .feather,
+.sidebar .nav-link.active .feather {
+  color: inherit;
+}
+
+.sidebar-heading {
+  font-size: .75rem;
+  text-transform: uppercase;
 }
 
 .time-table {
@@ -54,11 +111,24 @@
     border-radius: 2px;
     width: 100%;
     position: absolute;
-    background: $primary;
+    background: gray("600");
     color:$white;
 
+    .ball-scale {
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin-top: -32px;
+      z-index: 10000;
+      margin-right: -32px;
+      div {
+        background-color: gray("600");
+      }
+      transform: scale(0.7, 0.7);
+    }
+
     &.is-interacting {
-      opacity: 0.4;
+      opacity: 0.3;
     }
 
     &.time-table-occurrence-preview {
@@ -88,4 +158,12 @@
   .time-table-content {
     flex: 1;
   }
+}
+
+.prof-pic-wrapper {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  right: 0;
 }

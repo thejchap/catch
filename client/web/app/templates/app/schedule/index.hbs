@@ -1,0 +1,11 @@
+<div class="pt-3 px-4 d-flex flex-column schedule-index">
+  <div class='time-table-wrapper bg-white border d-flex flex-column mb-3 rounded
+  shadow
+    '>
+    {{time-table
+    occurrences=model
+    onAddOccurrence=(action 'calendarAddOccurrence')
+    onSelectOccurrence=(action 'calendarSelectOccurrence')
+    onUpdateOccurrence=(action 'calendarUpdateOccurrence')}}
+  </div>
+</div>

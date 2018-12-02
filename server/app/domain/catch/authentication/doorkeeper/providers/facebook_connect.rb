@@ -3,7 +3,7 @@ module Catch
     module Doorkeeper
       module Providers
         class FacebookConnect
-          FIELDS = %w[id,email,first_name,last_name].freeze
+          FIELDS = %w[id,email,first_name,last_name,picture].freeze
 
           attr_reader :assertion
 
@@ -19,7 +19,7 @@ module Catch
 
           def fetch_resource_owner
             User.fetch_by_facebook_id(me[:id]) || User.create!(
-              facebook_id: me[:id],
+              facebook_id: me.delete(:id),
               facebook_data: me
             )
           end

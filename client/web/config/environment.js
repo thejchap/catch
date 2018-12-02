@@ -22,6 +22,13 @@ module.exports = function(environment) {
       // when it is created
     },
 
+    apollo: {
+      apiURL: '/api/graphql',
+      // Optionally, set the credentials property of the Fetch Request interface
+      // to control when a cookie is sent:
+      // requestCredentials: 'same-origin', // other choices: 'include', 'omit'
+    },
+
     torii: {
       providers: {
         'facebook-connect': {
