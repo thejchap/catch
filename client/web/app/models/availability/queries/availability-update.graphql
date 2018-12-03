@@ -1,0 +1,9 @@
+#import 'catch/models/availability/queries/availability-fragment'
+
+mutation availabilityUpdate($id: ID!, $day: Int!, $startsAt: Int!, $endsAt: Int!) {
+  availabilityUpdate(input: { id: $id, day: $day, startsAt: $startsAt, endsAt: $endsAt }) {
+    availability {
+      ...AvailabilityFragment
+    }
+  }
+}

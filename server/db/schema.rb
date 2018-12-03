@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2018_11_30_172929) do
     t.int4range "range", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "user_id", null: false
   end
 
   create_table "locations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

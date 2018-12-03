@@ -1,22 +1,37 @@
 import Controller from '@ember/controller';
-import Object from '@ember/object';
+import Availability from 'catch/models/availability';
+import { inject as service } from '@ember/service';
+import { inject as controller } from '@ember/controller';
+import { computed } from '@ember/object';
 
 export default Controller.extend({
+  apollo: service(),
+
+  app: controller(),
+
+  availabilities: computed('app.model.@each.length', function() {
+    return this.app.model.getEach('node').map((node) => {
+      return Availability.create(node);
+    });
+  }),
+
   actions: {
-    calendarSelectOccurrence(occurrence) {
-      this.transitionToRoute('app.schedule.show', occurrence.id);
+    calendarSelectOccurrence({ modelId }) {
+      this.transitionToRoute('app.schedule.show', modelId);
     },
-    calendarAddOccurrence(occurrence) {
-      const { startsAt, endsAt, day } = occurrence;
-      const id = Math.round(Math.random() * (4000 - 1000) + 1000);
-      this.model.pushObject(Object.create({ startsAt, endsAt, day, id }));
+    calendarAddOccurrence(attrs) {
+      const availability = Availability.create(attrs);
+      this.availabilities.pushObject(availability);
+      availability.save(this.apollo);
     },
-    calendarUpdateOccurrence(occurrence, props, isPreview) {
-      occurrence.setProperties(props);
+    calendarUpdateOccurrence(availability, props, isPreview) {
+      availability.setProperties(props);
 
       if (isPreview) {
         return;
       }
+
+      availability.save(this.apollo);
     }
   }
 });

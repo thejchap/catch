@@ -7,6 +7,7 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.timestamps
     end
 
+    add_column :availabilities, :user_id, :uuid, null: false, index: true
     add_index :users, :facebook_id, unique: true
   end
 end

@@ -17,6 +17,7 @@ gem 'identity_cache'
 gem 'dalli'
 gem 'cityhash'
 gem 'jsonb_accessor'
+gem 'pundit'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

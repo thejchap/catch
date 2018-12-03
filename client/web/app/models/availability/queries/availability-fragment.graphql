@@ -1,0 +1,7 @@
+fragment AvailabilityFragment on Availability {
+  id
+  day
+  startsAt
+  endsAt
+  modelId
+}

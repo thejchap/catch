@@ -1,0 +1,7 @@
+#import 'catch/models/availability/queries/availability-fragment'
+
+query availabilities {
+  availabilities {
+    edges { node { ...AvailabilityFragment } }
+  }
+}

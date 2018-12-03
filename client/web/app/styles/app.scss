@@ -86,7 +86,8 @@ $primary: #dd052b;
       overflow: hidden;
     }
     .time-table-day-col {
-      color: gray("500");
+      color: gray("600");
+      font-weight: bold;
     }
   }
 
@@ -129,10 +130,18 @@ $primary: #dd052b;
 
     &.is-interacting {
       opacity: 0.3;
+
+      .ball-scale {
+        display: none;
+      }
     }
 
     &.time-table-occurrence-preview {
       @extend .shadow;
+
+      .ball-scale {
+        display: none;
+      }
     }
 
     .time-table-occurrence-resize-handle {
@@ -166,4 +175,11 @@ $primary: #dd052b;
   width: 100%;
   left: 0;
   right: 0;
+}
+
+.full-page-loader {
+  height: 100vh;
+  .loader-inner > div {
+    background-color: gray("300");
+  }
 }

@@ -6,6 +6,7 @@ const OccurrenceProxy = Object.extend({
   startsAt: reads('content.startsAt'),
   endsAt: reads('content.endsAt'),
   day: reads('content.day'),
+  isSaving: reads('content.isSaving'),
   duration: computed('startsAt', 'endsAt', function() {
     return this.endsAt - this.startsAt;
   }),

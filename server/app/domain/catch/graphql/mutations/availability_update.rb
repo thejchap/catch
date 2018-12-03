@@ -1,8 +1,9 @@
 module Catch
   module GraphQL
     module Mutations
-      class AvailabilityCreate < Base
+      class AvailabilityUpdate < Base
         null true
+        argument :id, ID, required: true, loads: Types::Availability, as: :record
         argument :day, Int, required: true
         argument :starts_at, Int, required: true
         argument :ends_at, Int, required: true
@@ -11,15 +12,19 @@ module Catch
 
         def services
           {
-            create: ::Catch::Availability::Create
+            update: ::Catch::Availability::Update
           }
         end
 
-        def resolve(day:, starts_at:, ends_at:)
-          result = services[:create].call(
-            day: day,
-            range: starts_at..ends_at,
-            user_id: context[:current_resource_owner].id
+        def authorized?(args)
+          authorize :update?, args[:record]
+        end
+
+        def resolve(record:, day:, starts_at:, ends_at:)
+          result = services[:update].call(
+            record: record,
+            day:    day,
+            range:  starts_at..ends_at,
           )
 
           return { availability: result.value, errors: [] } if result.success?
