@@ -11,6 +11,7 @@
 
 class User < ApplicationRecord
   include IdentityCache
+
   cache_index :facebook_id, unique: true
 
   has_many :access_tokens,
