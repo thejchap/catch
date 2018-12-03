@@ -11,7 +11,7 @@ module Catch
         class << self
           def proc
             klass = self
-            Proc.new { klass.new(self).resource_owner }
+            @proc ||= Proc.new { klass.new(self).resource_owner }
           end
         end
 

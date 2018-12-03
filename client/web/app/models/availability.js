@@ -16,7 +16,7 @@ const Availability = Object.extend({
       variables.id = id;
     }
 
-    apollo.mutate({ mutation, variables }, 'availability').finally(() => {
+    return apollo.mutate({ mutation, variables }, 'availability').finally(() => {
       set(this, 'isSaving', false)
     });
   }

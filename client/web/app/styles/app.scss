@@ -3,8 +3,14 @@
 $body-bg: #f9fbfd;
 $font-family-base: 'PT Sans', sans-serif;
 $primary: #dd052b;
+$success: #56E39F;
+$info: #08415C;
+$warning: #FFE74C;
+$danger: #FF5964;
 
 @import 'ember-cli-bootstrap-4/bootstrap';
+@import 'node_modules/noty/src/noty';
+@import 'node_modules/noty/src/themes/bootstrap-v4';
 
 .no-gutters {
   margin-right: 0;
@@ -182,4 +188,29 @@ $primary: #dd052b;
   .loader-inner > div {
     background-color: gray("300");
   }
+}
+
+.noty_theme__bootstrap-v4.noty_type__warning {
+  background-color: $warning;
+  color: darken($warning, 10%);
+  border-color: $warning;
+}
+
+.noty_theme__bootstrap-v4.noty_type__error {
+  background-color: #f2dede;
+  color: #a94442;
+  border-color: #ebccd1;
+}
+
+.noty_theme__bootstrap-v4.noty_type__info,
+.noty_theme__bootstrap-v4.noty_type__information {
+  background-color: $info;
+  color: white;
+  border-color: $info;
+}
+
+.noty_theme__bootstrap-v4.noty_type__success {
+  background-color: $success;
+  color: darken($success, 60%);
+  border-color: $success;
 }

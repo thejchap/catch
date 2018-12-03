@@ -1,4 +1,5 @@
 import Controller from '@ember/controller';
+import Noty from 'noty';
 import Availability from 'catch/models/availability';
 import { inject as service } from '@ember/service';
 import { inject as controller } from '@ember/controller';
@@ -22,16 +23,25 @@ export default Controller.extend({
     calendarAddOccurrence(attrs) {
       const availability = Availability.create(attrs);
       this.availabilities.pushObject(availability);
-      availability.save(this.apollo);
+
+      availability.save(this.apollo).then(() => {
+        new Noty({ text: 'Gym session added', theme: 'bootstrap-v4', layout: 'bottomRight', type: 'info', timeout: 1000 }).show();
+      });
     },
     calendarUpdateOccurrence(availability, props, isPreview) {
+      if (availability.isSaving) {
+        return;
+      }
+
       availability.setProperties(props);
 
       if (isPreview) {
         return;
       }
 
-      availability.save(this.apollo);
+      availability.save(this.apollo).then(() => {
+        new Noty({ text: 'Gym session updated', theme: 'bootstrap-v4', layout: 'bottomRight', type: 'info', timeout: 1000 }).show();
+      });
     }
   }
 });
