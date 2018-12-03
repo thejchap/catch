@@ -142,6 +142,16 @@ $danger: #FF5964;
       }
     }
 
+    &.is-saving {
+      opacity: 0.8;
+      pointer-events: none;
+      cursor: not-allowed;
+
+      .ball-scale {
+        display: none;
+      }
+    }
+
     &.time-table-occurrence-preview {
       @extend .shadow;
 

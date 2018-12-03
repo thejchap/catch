@@ -48,7 +48,12 @@ Rails.application.configure do
   config.log_tags = [ :request_id ]
 
   # Use a different cache store in production.
-  # config.cache_store = :mem_cache_store
+  config.cache_store = :mem_cache_store
+
+  config.identity_cache_store = :mem_cache_store, {
+    expires_in: 6.hours.to_i,
+    support_cas: true
+  }
 
   # Use a real queuing backend for Active Job (and separate queues per environment)
   # config.active_job.queue_adapter     = :resque
