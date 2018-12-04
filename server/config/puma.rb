@@ -38,6 +38,6 @@ plugin :tmp_restart
 # For Nginx buildpack
 bind 'unix:///tmp/nginx.socket'
 
-before_fork do
+on_worker_fork do
   FileUtils.touch '/tmp/app-initialized'
 end

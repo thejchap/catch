@@ -1,7 +1,7 @@
 # vim: filetype=nginx
 
 daemon off;
-# Heroku dynos have at least 4 cores.
+#Heroku dynos have at least 4 cores.
 worker_processes <%= ENV['NGINX_WORKERS'] || 4 %>;
 
 events {
@@ -25,35 +25,18 @@ http {
   default_type application/octet-stream;
   sendfile on;
 
-  # Must read the body in 5 seconds.
-  client_body_timeout <%= ENV['NGINX_CLIENT_BODY_TIMEOUT'] || 5 %>;
+  client_body_timeout 5;
 
   upstream app_server {
-		server unix:/tmp/nginx.socket fail_timeout=0;
- 	}
+    server unix:/tmp/nginx.socket fail_timeout=0;
+  }
 
   server {
     listen <%= ENV["PORT"] %>;
     server_name _;
     keepalive_timeout 5;
-    client_max_body_size <%= ENV['NGINX_CLIENT_MAX_BODY_SIZE'] || 1 %>M;
 
-    location = / {
-      add_header Content-Type text/plain;
-      return 200 'Hello';
-    }
-
-    location = /favicon.ico {
-      add_header Content-Type image/x-icon;
-      return 200 '';
-    }
-
-    location = /ping {
-      add_header Content-Type text/plain;
-      return 200 'pong';
-    }
-
-    location /(api|oauth) {
+    location / {
       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
       proxy_set_header Host $http_host;
       proxy_redirect off;
