@@ -36,7 +36,7 @@ environment ENV.fetch("RAILS_ENV") { "development" }
 plugin :tmp_restart
 
 # For Nginx buildpack
-bind 'unix://tmp/nginx.socket'
+bind 'unix:///tmp/nginx.socket'
 
 before_fork do
   FileUtils.touch '/tmp/app-initialized'
