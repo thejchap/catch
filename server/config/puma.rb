@@ -23,7 +23,7 @@ environment ENV.fetch("RAILS_ENV") { "development" }
 # Workers do not work on JRuby or Windows (both of which do not support
 # processes).
 #
-workers ENV.fetch("WEB_CONCURRENCY") { 1 }
+workers Integer(ENV['WEB_CONCURRENCY'] || [1, `grep -c processor /proc/cpuinfo`.to_i].max)
 
 # Use the `preload_app!` method when specifying a `workers` number.
 # This directive tells Puma to first boot the application and load code
@@ -40,6 +40,5 @@ bind 'unix:///tmp/nginx.socket'
 
 on_worker_boot do
   ActiveRecord::Base.establish_connection
-
   FileUtils.touch '/tmp/app-initialized'
 end
