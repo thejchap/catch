@@ -1,0 +1,20 @@
+<div class="row justify-content-center mb-3">
+  <div class="col-4 p-2">
+    {{shoe-icon color="#dd052b"}}
+  </div>
+</div>
+
+{{#side-nav}}
+  {{side-nav/item title="Schedule" icon="home" path="me.schedule"}}
+  {{side-nav/item title="Activities" icon="list" path="me.activities"}}
+  {{side-nav/item title="Location" icon="map-pin" path="me.location"}}
+{{/side-nav}}
+
+<div class="d-flex justify-content-center border-top py-2
+  prof-pic-wrapper">
+  <div class="col-4 p-2">
+    <img src={{currentUser.data.pictureUrl}} alt="" class='img-fluid
+    rounded-circle'>
+  </div>
+</div>
+
