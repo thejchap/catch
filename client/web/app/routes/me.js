@@ -8,7 +8,10 @@ export default Route.extend(AuthenticatedRouteMixin, RouteQueryManager, {
   currentUser: service(),
   session: service(),
 
+  authenticationRoute: 'index',
+
   beforeModel() {
+    this._super(...arguments);
     return this._loadCurrentUser();
   },
 

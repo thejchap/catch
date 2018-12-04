@@ -7,6 +7,11 @@ $success: #56E39F;
 $info: #08415C;
 $warning: #FFE74C;
 $danger: #FF5964;
+$facebook: #3b5998;
+
+$theme-colors: (
+  "facebook": $facebook
+);
 
 @import 'ember-cli-bootstrap-4/bootstrap';
 @import 'node_modules/noty/src/noty';

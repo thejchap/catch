@@ -12,6 +12,7 @@ export default Route.extend(ApplicationRouteMixin, {
 
   activate() {
     $('#decoy').remove();
+    next(() => window.feather.replace());
   },
 
   routeAfterAuthentication: 'me',
