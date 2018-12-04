@@ -1,7 +1,6 @@
 # vim: filetype=nginx
 
 daemon off;
-#Heroku dynos have at least 4 cores.
 worker_processes <%= ENV['NGINX_WORKERS'] || 4 %>;
 
 events {
@@ -35,6 +34,11 @@ http {
     listen <%= ENV["PORT"] %>;
     server_name _;
     keepalive_timeout 5;
+
+    location = /ping {
+      add_header Content-Type text/plain;
+      return 200 'pong';
+    }
 
     location / {
       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;

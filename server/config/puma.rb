@@ -11,7 +11,7 @@ threads threads_count, threads_count
 
 # Specifies the `port` that Puma will listen on to receive requests; default is 3000.
 #
-port(ENV.fetch("PORT") { 3000 }) unless ENV['RAILS_ENV'] == 'production'
+port ENV.fetch("PORT") { 3000 }
 
 # Specifies the `environment` that Puma will run in.
 #
@@ -23,7 +23,7 @@ environment ENV.fetch("RAILS_ENV") { "development" }
 # Workers do not work on JRuby or Windows (both of which do not support
 # processes).
 #
-# workers ENV.fetch("WEB_CONCURRENCY") { 2 }
+workers ENV.fetch("WEB_CONCURRENCY") { 2 }
 
 # Use the `preload_app!` method when specifying a `workers` number.
 # This directive tells Puma to first boot the application and load code
@@ -38,7 +38,7 @@ plugin :tmp_restart
 # For Nginx buildpack
 bind 'unix:///tmp/nginx.socket'
 
-on_worker_fork do
-  puts 'TOUCHING'
+on_worker_boot do
+  ActiveRecord::Base.establish_connection
   FileUtils.touch '/tmp/app-initialized'
 end
