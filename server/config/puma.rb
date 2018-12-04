@@ -30,7 +30,7 @@ environment ENV.fetch("RAILS_ENV") { "development" }
 # before forking the application. This takes advantage of Copy On Write
 # process behavior so workers use less memory.
 #
-# preload_app!
+preload_app!
 
 # Allow puma to be restarted by `rails restart` command.
 plugin :tmp_restart
@@ -39,5 +39,6 @@ plugin :tmp_restart
 bind 'unix:///tmp/nginx.socket'
 
 on_worker_fork do
+  puts 'TOUCHING'
   FileUtils.touch '/tmp/app-initialized'
 end
