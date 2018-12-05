@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
-  post '/api/graphql', to: "api/graphql#execute"
-  use_doorkeeper
+  namespace :api do
+    post '/graphql', to: 'graphql#execute'
+  end
+
+  scope :api do
+    use_doorkeeper
+  end
 
   get '/me', to: 'application#index'
   get '/me/*path', to: 'application#index'

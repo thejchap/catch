@@ -10,7 +10,7 @@ const assign = emberAssign || merge;
 export default Oauth2PasswordGrant.extend({
   torii: service(),
 
-  serverTokenEndpoint: '/oauth/token',
+  serverTokenEndpoint: '/api/oauth/token',
 
   authenticate(provider) {
     return this.get('torii').open(provider).then((auth) => {
