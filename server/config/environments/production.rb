@@ -47,13 +47,17 @@ Rails.application.configure do
   # Prepend all log lines with the following tags.
   config.log_tags = [ :request_id ]
 
-  # Use a different cache store in production.
-  config.cache_store = :mem_cache_store
-
-  config.identity_cache_store = :mem_cache_store, {
-    expires_in: 6.hours.to_i,
-    support_cas: true
+  memcached_opts = {
+    compress: true,
+    support_cas: true,
+    username: ENV['MEMCACHIER_USERNAME'],
+    password: ENV['MEMCACHIER_PASSWORD']
   }
+
+  memcached_nodes = (ENV['MEMCACHIER_SERVERS'] || '').split ','
+
+  # Use a different cache store in production.
+  config.cache_store = :mem_cache_store, memcached_nodes, memcached_opts
 
   # Use a real queuing backend for Active Job (and separate queues per environment)
   # config.active_job.queue_adapter     = :resque
