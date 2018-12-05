@@ -2,15 +2,17 @@
   <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
     <header class="masthead mb-auto">
       <div class="inner d-md-block d-none">
-        <h3 class="masthead-brand text-center" style='width: 60px;'>
+        <h3 class="masthead-brand text-center align-content-center" style='width: 60px;'>
           {{shoe-icon color='#fff'}}
         </h3>
         <nav class="nav nav-masthead justify-content-center">
           <a class="nav-link active" href="#">Home</a>
-          {{#if session.isAuthenticated}}
-            {{link-to 'My Account' 'me' class='nav-link'}}
-          {{else}}
-            <a class="nav-link" href="#" {{action 'authenticateWithFacebook'}}>Sign Up</a>
+          {{#if false}}
+            {{#if session.isAuthenticated}}
+              {{link-to 'My Account' 'me' class='nav-link'}}
+            {{else}}
+              <a class="nav-link" href="#" {{action 'authenticateWithFacebook'}}>Sign Up</a>
+            {{/if}}
           {{/if}}
         </nav>
       </div>
@@ -22,10 +24,14 @@
       gym schedule and desired types of climbing. Set up days and times you want to
       climb, and Catch will pair you with a great partner for each visit!</p>
       <p class="lead">
-      {{#if session.isAuthenticated}}
-        {{link-to 'My Account' 'me' class='btn btn-lg btn-primary'}}
+      {{#if false}}
+        {{#if session.isAuthenticated}}
+          {{link-to 'My Account' 'me' class='btn btn-lg btn-primary'}}
+        {{else}}
+          <a href="#" class="btn btn-lg btn-primary" {{action "authenticateWithFacebook"}}>Sign Up</a>
+        {{/if}}
       {{else}}
-        <a href="#" class="btn btn-lg btn-primary" {{action "authenticateWithFacebook"}}>Sign Up</a>
+        <a href="#" class="disabled btn btn-lg btn-primary">Coming Soon</a>
       {{/if}}
       </p>
     </main>
@@ -34,7 +40,7 @@
       <div class="inner">
         <p>
         Built by
-        <a href="#">
+        <a href="https://instagram.com/thejchap" target='_blank'>
           @thejchap
         </a>
         </p>
