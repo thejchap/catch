@@ -44,6 +44,10 @@ Rails.application.configure do
   # when problems arise.
   config.log_level = :debug
 
+  config.redis = {
+    url: ENV['REDIS_URL']
+  }
+
   # Prepend all log lines with the following tags.
   config.log_tags = [ :request_id ]
 

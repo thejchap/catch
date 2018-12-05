@@ -11,7 +11,12 @@ threads threads_count, threads_count
 
 # Specifies the `port` that Puma will listen on to receive requests; default is 3000.
 #
-# port ENV.fetch("PORT") { 3000 }
+if ENV['RAILS_ENV'] == 'production'
+  # For Nginx buildpack
+  bind 'unix:///tmp/nginx.socket'
+else
+  port ENV.fetch("PORT") { 3000 }
+end
 
 # Specifies the `environment` that Puma will run in.
 #
@@ -34,9 +39,6 @@ preload_app!
 
 # Allow puma to be restarted by `rails restart` command.
 plugin :tmp_restart
-
-# For Nginx buildpack
-bind 'unix:///tmp/nginx.socket'
 
 on_worker_boot do
   ActiveRecord::Base.establish_connection

@@ -18,7 +18,7 @@ module Catch
           private
 
           def fetch_resource_owner
-            User.fetch_by_facebook_id(me[:id]) || User.create!(
+            ::User.fetch_by_facebook_id(me[:id]) || ::User.create!(
               facebook_id: me.delete(:id),
               facebook_data: me
             )
@@ -29,7 +29,7 @@ module Catch
           end
 
           def fb
-            @fb ||= Koala::Facebook::API.new assertion
+            @fb ||= ::Koala::Facebook::API.new assertion
           end
         end
       end

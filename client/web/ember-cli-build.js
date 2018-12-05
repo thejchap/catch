@@ -6,6 +6,9 @@ module.exports = function(defaults) {
   let app = new EmberApp(defaults, {
     'ember-cli-bootstrap-4': {
       js: null
+    },
+    fingerprint: {
+      prepend: 'https://s3.amazonaws.com/assets.catch.projects.jchap.me/' + EmberApp.env() + '/client/web/ember/build/'
     }
   });
 
