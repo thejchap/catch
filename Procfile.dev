@@ -1,0 +1,2 @@
+server: sh -c 'cd ./server/ && bin/rails s -p 3000'
+client_web: sh -c 'cd ./client/web/ && ember s --proxy http://localhost:3000 -p 4200'

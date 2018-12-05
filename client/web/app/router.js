@@ -13,6 +13,7 @@ Router.map(function() {
     });
     this.route('activities');
     this.route('location');
+    this.route('account');
   });
 });
 

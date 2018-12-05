@@ -3,7 +3,17 @@ module Catch
     module Web
       class FetchIndex < Shared::ServiceBase
         def call
-          success wolverine.fetch_index
+          success index
+        end
+
+        private
+
+        def index
+          minify wolverine.fetch_index
+        end
+
+        def minify(contents)
+          contents.gsub /\n+/, ''
         end
       end
     end

@@ -191,11 +191,22 @@ $theme-colors: (
 }
 
 .prof-pic-wrapper {
+  cursor: pointer;
   position: absolute;
   bottom: 0;
   width: 100%;
   left: 0;
   right: 0;
+  img {
+    border: 3px solid transparent;
+  }
+
+  &.active {
+    background-color: gray("100");
+    img {
+      border-color: $primary;
+    }
+  }
 }
 
 .full-page-loader {

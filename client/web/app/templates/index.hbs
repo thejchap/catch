@@ -7,13 +7,13 @@
         </h3>
         <nav class="nav nav-masthead justify-content-center">
           <a class="nav-link active" href="#">Home</a>
-          {{#if false}}
+          {{#unless prelaunch}}
             {{#if session.isAuthenticated}}
               {{link-to 'My Account' 'me' class='nav-link'}}
             {{else}}
               <a class="nav-link" href="#" {{action 'authenticateWithFacebook'}}>Sign Up</a>
             {{/if}}
-          {{/if}}
+          {{/unless}}
         </nav>
       </div>
     </header>
@@ -24,14 +24,14 @@
       gym schedule and desired types of climbing. Set up days and times you want to
       climb, and Catch will pair you with a great partner for each visit!</p>
       <p class="lead">
-      {{#if false}}
+      {{#if prelaunch}}
+        <a href="#" class="disabled btn btn-lg btn-primary">Coming Soon</a>
+      {{else}}
         {{#if session.isAuthenticated}}
           {{link-to 'My Account' 'me' class='btn btn-lg btn-primary'}}
         {{else}}
           <a href="#" class="btn btn-lg btn-primary" {{action "authenticateWithFacebook"}}>Sign Up</a>
         {{/if}}
-      {{else}}
-        <a href="#" class="disabled btn btn-lg btn-primary">Coming Soon</a>
       {{/if}}
       </p>
     </main>
