@@ -15,7 +15,7 @@ export default Object.extend({
   occurrences: computed('component.occurrences.[]', function() {
     let proxies = A();
 
-    this.component.occurrences.forEach((content) => {
+    (this.component.occurrences || []).forEach((content) => {
       proxies.pushObject(OccurrenceProxy.create({ calendar: this, content }));
     });
 

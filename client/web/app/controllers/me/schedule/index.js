@@ -3,7 +3,7 @@ import Noty from 'noty';
 import Availability from 'catch/models/availability';
 import { inject as service } from '@ember/service';
 import { inject as controller } from '@ember/controller';
-import { computed } from '@ember/object';
+import { computed, setProperties } from '@ember/object';
 import { run } from '@ember/runloop';
 
 const { next } = run;
@@ -13,11 +13,7 @@ export default Controller.extend({
 
   me: controller(),
 
-  availabilities: computed('app.model.@each.length', function() {
-    return this.me.model.getEach('node').map((node) => {
-      return Availability.create(node);
-    });
-  }),
+  availabilities: computed.reads('me.model'),
 
   actions: {
     calendarSelectOccurrence({ modelId }) {
@@ -25,17 +21,11 @@ export default Controller.extend({
     },
     calendarAddOccurrence(attrs) {
       const availability = Availability.create(attrs);
-      this.availabilities.pushObject(availability);
+      this.me.model.pushObject(availability);
 
       next(() => {
         availability.save(this.apollo).then(() => {
-          new Noty({
-            text: 'Gym session added',
-            theme: 'bootstrap-v4',
-            layout: 'bottomRight',
-            type: 'info',
-            timeout: 1000
-          }).show();
+          new Noty({ text: 'Gym session added' }).show();
         });
       });
     },
@@ -44,7 +34,7 @@ export default Controller.extend({
         return;
       }
 
-      availability.setProperties(props);
+      setProperties(availability, props);
 
       if (isPreview) {
         return;
@@ -52,13 +42,7 @@ export default Controller.extend({
 
       next(() => {
         availability.save(this.apollo).then(() => {
-          new Noty({
-            text: 'Gym session updated',
-            theme: 'bootstrap-v4',
-            layout: 'bottomRight',
-            type: 'info',
-            timeout: 1000
-          }).show();
+          new Noty({ text: 'Gym session updated' }).show();
         });
       });
     }

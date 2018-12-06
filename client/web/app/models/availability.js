@@ -1,4 +1,4 @@
-import Object, { set } from '@ember/object';
+import Object, { set, setProperties } from '@ember/object';
 import myAvailabilities from "catch/models/availability/queries/my-availabilities";
 import availabilityCreate from "catch/models/availability/queries/availability-create";
 import availabilityUpdate from "catch/models/availability/queries/availability-update";
@@ -16,7 +16,10 @@ const Availability = Object.extend({
       variables.id = id;
     }
 
-    return apollo.mutate({ mutation, variables }, 'availability').finally(() => {
+    return apollo.mutate({ mutation, variables }, 'availabilityCreate.availability').then((res) => {
+      setProperties(this, res);
+      return this;
+    }).finally(() => {
       set(this, 'isSaving', false)
     });
   }
@@ -26,7 +29,9 @@ Availability.reopenClass({
   watchQuery(apollo) {
     return apollo.watchQuery({
       query: myAvailabilities
-    }, 'availabilities.edges');
+    }, 'availabilities.edges').then((res) => {
+      return res.map(({ node }) => Availability.create(node));
+    });
   }
 });
 

@@ -1,4 +1,5 @@
 import Route from '@ember/routing/route';
+import Noty from 'noty';
 import $ from 'jquery';
 import { inject as service } from '@ember/service';
 import { run } from '@ember/runloop';
@@ -13,6 +14,13 @@ export default Route.extend(ApplicationRouteMixin, {
   activate() {
     $('#decoy').remove();
     next(() => window.feather.replace());
+
+    Noty.overrideDefaults({
+      theme: 'bootstrap-v4',
+      layout: 'bottomRight',
+      type: 'info',
+      timeout: 1000
+    });
   },
 
   routeAfterAuthentication: 'me',

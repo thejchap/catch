@@ -20,6 +20,10 @@ export default Component.extend({
   duration: reads('model.duration'),
   referenceElement: reads('table.referenceElement'),
   click() {
+    if (this.isInteracting) {
+      return;
+    }
+
     this.attrs.onSelect(this.model.content);
   },
   endsAtLabel: computed('endsAt', function() {
