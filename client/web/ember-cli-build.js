@@ -8,11 +8,12 @@ module.exports = function(defaults) {
       js: null
     },
     fingerprint: {
-      prepend: 'https://s3.amazonaws.com/assets.catch.projects.jchap.me/' + EmberApp.env() + '/client/web/ember/build/'
+      exclude: ['et-bg-dark.jpg'],
+      prepend: 'https://d158rsbl5gvkw0.cloudfront.net/' + EmberApp.env() + '/client/web/ember/build/'
     }
   });
 
-  app.import('node_modules/loaders.css/loaders.min.css');
+  app.import('vendor/feather.min.js');
 
   // Use `app.import` to add additional libraries to the generated
   // output files.
