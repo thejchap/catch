@@ -1,12 +1,14 @@
 import Route from '@ember/routing/route';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
-import Availability from 'catch/models/availability';
+import Noty from 'noty';
 import { RouteQueryManager } from "ember-apollo-client";
 import { inject as service } from '@ember/service';
 
 export default Route.extend(AuthenticatedRouteMixin, RouteQueryManager, {
   currentUser: service(),
   session: service(),
+  apollo: service(),
+  availability: service(),
 
   authenticationRoute: 'index',
 
@@ -16,12 +18,21 @@ export default Route.extend(AuthenticatedRouteMixin, RouteQueryManager, {
   },
 
   model() {
-    return Availability.watchQuery(this.apollo);
+    return this.availability.watchQuery(this.apollo);
   },
 
   _loadCurrentUser() {
     return this.currentUser.load().catch(() => {
       this.session.invalidate();
     });
+  },
+
+  actions: {
+    availabilityAdded(variables) {
+      this.availability.create(variables);
+    },
+    availabilityUpdated(availability) {
+      this.availability.update(availability);
+    }
   }
 });

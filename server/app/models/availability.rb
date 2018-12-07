@@ -15,6 +15,7 @@ class Availability < ApplicationRecord
 
   validates :day, presence: true
   validates :range, presence: true
+  belongs_to :user
 
   cache_index :user_id
 

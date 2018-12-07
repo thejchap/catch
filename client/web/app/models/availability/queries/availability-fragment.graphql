@@ -4,4 +4,18 @@ fragment AvailabilityFragment on Availability {
   startsAt
   endsAt
   modelId
+  matches {
+    edges {
+      jaccard
+      distance
+      rank
+      node {
+        id
+        user {
+          firstName
+          pictureUrl
+        }
+      }
+    }
+  }
 }

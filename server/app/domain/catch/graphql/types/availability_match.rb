@@ -1,19 +1,14 @@
 module Catch
   module GraphQL
     module Types
-      class Availability < Model
+      class AvailabilityMatch < Model
         field :day,       Int,    null: false
         field :starts_at, Int,    null: false
         field :ends_at,   Int,    null: false
         field :user,      Types::User, null: false
-        field :matches,   Types::AvailabilityMatchConnection, null: false
 
         def user
           ::User.fetch object.user_id
-        end
-
-        def matches
-          []
         end
       end
     end
