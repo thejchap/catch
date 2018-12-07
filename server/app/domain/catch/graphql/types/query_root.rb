@@ -8,7 +8,7 @@ module Catch
         field :availabilities,  [Types::Availability], null: false
 
         def availabilities
-          services[:my_availabilities].call(user: me).value
+          Loaders::IdentityCacheAssociationLoader.for(::User, :availabilities).load me.id
         end
 
         def me

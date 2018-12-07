@@ -21,6 +21,7 @@ gem 'pundit'
 gem 'rubocop'
 gem 'redis'
 gem 'wolverine'
+gem 'graphql-batch'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

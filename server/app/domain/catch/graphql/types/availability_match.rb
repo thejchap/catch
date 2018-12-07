@@ -8,7 +8,7 @@ module Catch
         field :user,      Types::User, null: false
 
         def user
-          ::User.fetch object.user_id
+          Loaders::IdentityCacheLoader.for(::User).load object.user_id
         end
       end
     end

@@ -3,6 +3,7 @@ module Catch
     class Schema < ::GraphQL::Schema
       mutation Types::Mutation
       query Types::QueryRoot
+      use ::GraphQL::Batch
 
       class << self
         def id_from_object(object, _type_definition, _query_context)

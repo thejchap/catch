@@ -14,6 +14,8 @@ class User < ApplicationRecord
 
   cache_index :facebook_id, unique: true
 
+  has_many :availabilities
+
   has_many :access_tokens,
     class_name: 'Doorkeeper::AccessToken',
     foreign_key: :resource_owner_id,
