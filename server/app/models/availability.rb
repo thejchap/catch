@@ -16,6 +16,12 @@ class Availability < ApplicationRecord
   validates :day, presence: true
   validates :range, presence: true
   belongs_to :user
+  scope :at_location, (lambda do |location_id|
+    joins(:user).where(
+      'users.settings->>\'location\' = ?',
+      location_id
+    )
+  end)
 
   cache_index :user_id
 

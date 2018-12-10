@@ -3,7 +3,7 @@ module Catch
     module Policies
       class AvailabilityPolicy < ApplicationPolicy
         def show?
-          record.user_id == user.id
+          true
         end
 
         def update?

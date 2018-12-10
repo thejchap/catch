@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_10_043231) do
+ActiveRecord::Schema.define(version: 2018_12_10_145036) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "cube"
@@ -51,11 +51,13 @@ ActiveRecord::Schema.define(version: 2018_12_10_043231) do
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "facebook_id", null: false
-    t.jsonb "facebook_data", default: "{}"
+    t.jsonb "facebook_data", default: {}
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.jsonb "settings", default: "{}"
+    t.jsonb "settings", default: {}
+    t.index "((settings ->> 'location'::text))", name: "index_users_on_settings_location_text"
     t.index ["facebook_id"], name: "index_users_on_facebook_id", unique: true
+    t.index ["settings"], name: "index_users_on_settings", using: :gin
   end
 
 end

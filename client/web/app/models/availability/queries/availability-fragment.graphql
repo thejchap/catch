@@ -7,14 +7,9 @@ fragment AvailabilityFragment on Availability {
   matches {
     edges {
       jaccard
-      distance
       rank
       node {
         id
-        user {
-          firstName
-          pictureUrl
-        }
       }
     }
   }

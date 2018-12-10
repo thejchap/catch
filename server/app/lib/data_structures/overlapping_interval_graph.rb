@@ -6,7 +6,7 @@ module DataStructures
     class << self
       def build(db)
         graph = new
-        tree = EnrichedIntervalTree.new(identify: id_proc)
+        tree = ::DataStructures::EnrichedIntervalTree.new(identify: id_proc)
         db.each { |id, range| tree.insert range, meta: { id: id } }
 
         tree.each do |node|
@@ -35,7 +35,7 @@ module DataStructures
       def build_edge(prange, id, range)
         {
           node: { range: range, id: id },
-          jaccard: range.jaccard(prange),
+          jaccard: range.jaccard(prange)
         }
       end
 

@@ -7,6 +7,17 @@ module Catch
         end
 
         def perform(ids)
+          if ids.length == 1
+            id = ids.first
+            fulfill id, @model.fetch(id)
+          else
+            fetch_multi ids
+          end
+        end
+
+        private
+
+        def fetch_multi(ids)
           @model.fetch_multi(ids).each do |record|
             fulfill record.id, record
           end

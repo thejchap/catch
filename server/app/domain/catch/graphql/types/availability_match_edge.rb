@@ -2,22 +2,26 @@ module Catch
   module GraphQL
     module Types
       class AvailabilityMatchEdge < ::GraphQL::Types::Relay::BaseEdge
-        node_type Types::AvailabilityMatch
+        node_type Types::Availability
 
-        field :jaccard,   Float,  null: false
-        field :distance,  Int,    null: false
-        field :rank,      Int,    null: false
+        field :jaccard, Float,  null: false
+        field :rank,    Int,    null: false
+        field :day,     Int,    null: false
 
-        def jaccard
-          0.5
+        def node
+          super.node
         end
 
-        def distance
-          1
+        def day
+          object.node.day
+        end
+
+        def jaccard
+          object.node.jaccard
         end
 
         def rank
-          0
+          object.node.rank
         end
       end
     end
