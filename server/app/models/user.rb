@@ -36,6 +36,6 @@ class User < ApplicationRecord
     settings_location:              [:string,  store_key: :location]
 
   def picture_url
-    picture.dig 'data', 'url'
+    picture&.dig 'data', 'url'
   end
 end

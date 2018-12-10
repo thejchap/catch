@@ -4,13 +4,17 @@
   timeSlotHeight=timeSlotHeight as |day table|}}
 
   {{#each day.occurrences as |occurrence|}}
-    {{time-table/table/occurrence
-      model=occurrence
-      timeSlotHeight=timeSlotHeight
-      timeSlotDuration=timeSlotDuration
-      onUpdate=(action this.attrs.onUpdateOccurrence)
-      onSelect=(action this.attrs.onSelectOccurrence)
-      table=table}}
+    {{#if hasBlock}}
+      {{yield occurrence table this}}
+    {{else}}
+      {{time-table/table/occurrence
+        model=occurrence
+        timeSlotHeight=timeSlotHeight
+        timeSlotDuration=timeSlotDuration
+        onUpdate=(action this.attrs.onUpdateOccurrence)
+        onSelect=(action this.attrs.onSelectOccurrence)
+        table=table}}
+    {{/if}}
   {{/each}}
 
   {{#if day.occurrencePreview}}

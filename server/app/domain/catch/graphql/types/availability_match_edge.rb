@@ -4,12 +4,17 @@ module Catch
       class AvailabilityMatchEdge < ::GraphQL::Types::Relay::BaseEdge
         node_type Types::Availability
 
-        field :jaccard, Float,  null: false
-        field :rank,    Int,    null: false
-        field :day,     Int,    null: false
+        field :jaccard,     Float,  null: false
+        field :rank,        Int,    null: false
+        field :day,         Int,    null: false
+        field :best_match,  Boolean, null: false
+
+        def best_match
+          rank == 0
+        end
 
         def node
-          super.node
+          object.node.node
         end
 
         def day

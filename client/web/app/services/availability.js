@@ -6,8 +6,6 @@ import availabilityUpdate from "catch/models/availability/queries/availability-u
 import query from "catch/models/availability/queries/my-availabilities";
 import Availability from 'catch/models/availability';
 
-const POLL_INTERVAL = 5 * 1000;
-
 export default Service.extend({
   apollo: service(),
 
@@ -26,7 +24,12 @@ export default Service.extend({
           startsAt,
           endsAt,
           day,
-          matches: [],
+          matches: {
+            any: false,
+            count: 0,
+            edges: [],
+            __typename: "AvailabilityMatchConnection"
+          },
           modelId: id,
           id: `gid://catch/Availability/${id}`
         }

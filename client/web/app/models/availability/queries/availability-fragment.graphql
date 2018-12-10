@@ -5,11 +5,25 @@ fragment AvailabilityFragment on Availability {
   endsAt
   modelId
   matches {
+    any
+    count
     edges {
-      jaccard
       rank
+      bestMatch
       node {
         id
+        startsAt
+        endsAt
+        user {
+          firstName
+          pictureUrl
+          settings {
+            activitiesBouldering
+            activitiesLead
+            activitiesWorkout
+            activitiesTopRope
+          }
+        }
       }
     }
   }

@@ -11,12 +11,11 @@ const { reads } = computed;
 export default Component.extend({
   classNames: ['time-table-occurrence'],
   attributeBindings: ['style'],
-  classNameBindings: ['isInteracting', 'isSaving'],
+  classNameBindings: ['isInteracting'],
   calendar: reads('model.calendar'),
   startsAt: reads('model.startsAt'),
   endsAt: reads('model.endsAt'),
   day: reads('model.day'),
-  isSaving: reads('model.isSaving'),
   duration: reads('model.duration'),
   referenceElement: reads('table.referenceElement'),
   click() {

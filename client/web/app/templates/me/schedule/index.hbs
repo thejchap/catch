@@ -1,11 +1,27 @@
-<div class="pt-3 pr-4 d-flex flex-column schedule-index">
-  <div class='time-table-wrapper bg-white border d-flex flex-column mb-3 rounded
+<div class="pt-3 pb-2 pr-4 d-flex flex-column schedule-index">
+  <div class='time-table-wrapper bg-white border d-flex flex-column rounded
   shadow
     '>
-    {{time-table
+    {{#time-table
     occurrences=availabilities
     onAddOccurrence=(action 'calendarAddOccurrence')
-    onSelectOccurrence=(action 'calendarSelectOccurrence')
-    onUpdateOccurrence=(action 'calendarUpdateOccurrence')}}
+    as |occurrence table calendar|}}
+      {{me/schedule/availability-block
+        model=occurrence
+        timeSlotHeight=calendar.timeSlotHeight
+        timeSlotDuration=calendar.timeSlotDuration
+        onUpdate=(action 'calendarUpdateOccurrence')
+        onSelect=(action 'calendarSelectOccurrence')
+        table=table}}
+    {{/time-table}}
+  </div>
+  <div class="d-flex justify-content-center pt-4 pb-3 clearfix">
+  <small class='text-black-50'>
+    {{feather-icon icon='check-circle' class='text-success'}}
+    All changes saved
+    <span class="mx-2"></span>
+    {{feather-icon icon='check-circle' class='text-success'}}
+    Matches updated 5 minutes ago
+  </small>
   </div>
 </div>

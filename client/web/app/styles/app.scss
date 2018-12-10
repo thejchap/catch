@@ -237,7 +237,6 @@ $theme-colors: (
   }
 
   &.active {
-    background-color: gray("100");
     img {
       border-color: $primary;
     }
@@ -356,4 +355,37 @@ $theme-colors: (
     color: rgba(255, 255, 255, .7);
   }
 }
+}
+
+.time-table .availability-block {
+  background: gray("600");
+  @extend .py-2;
+  @extend .px-2;
+
+  a {
+    color: white;
+    text-decoration: underline;
+  }
+
+  .match-check {
+    @extend .shadow-lg;
+    @extend .rounded-circle;
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+    height: 25px;
+    width: 25px;
+    background: $success;
+    position: absolute;
+    padding-top: 1px;
+    margin-top: -12px;
+    margin-right: -12px;
+    top: 0;
+    right: 0;
+    z-index: 10000;
+  }
+
+  &.has-matches {
+    background: gray("700");
+  }
 }

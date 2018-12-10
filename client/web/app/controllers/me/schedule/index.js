@@ -15,8 +15,12 @@ export default Controller.extend({
   availabilities: reads('me.model'),
 
   actions: {
-    calendarSelectOccurrence({ modelId }) {
-      this.transitionToRoute('me.schedule.show', modelId);
+    calendarSelectOccurrence(availability) {
+      if (!availability.matches.any) {
+        return;
+      }
+
+      this.transitionToRoute('me.schedule.show', availability.modelId);
     },
     calendarAddOccurrence(attrs) {
       next(() => this.send('availabilityAdded', attrs));
@@ -27,6 +31,12 @@ export default Controller.extend({
       if (isPreview) {
         return;
       }
+
+      setProperties(availability, {
+        'matches.any': false,
+        'matches.count': 0,
+        'matches.edges': []
+      });
 
       next(() => this.send('availabilityUpdated', availability));
     }

@@ -1,0 +1,36 @@
+{{#if hasMatches}}
+  <div class="match-check">
+    {{feather-icon icon='check'}}
+  </div>
+{{else}}
+  <div class="loader-inner ball-scale">
+    <div></div>
+  </div>
+{{/if}}
+
+<small class="d-none d-sm-block time-table-occurrence-label mb-1">
+  <div class='d-inline-block'>
+    {{startsAtLabel}} - {{endsAtLabel}}
+
+  {{#if hasMatches}}
+    {{link-to 'View' 'me.schedule.show' availability.modelId class='ml-1'}}
+  {{/if}}
+  </div>
+</small>
+{{#if hasMatches}}
+<div class="d-none d-sm-block">
+  {{#each availability.matches.edges as |edge|}}
+      {{ember-initials class='rounded-circle' image=edge.node.user.pictureUrl
+      size=20 name=edge.node.user.firstName fontFamily="PT Sans, sans-serif"}}
+  {{/each}}
+</div>
+<div class="d-sm-none d-xs-block">
+  <div class="d-flex justify-content-center pt-1">
+      {{ember-initials class='rounded-circle'
+      image=availability.matches.edges.firstObject.node.user.pictureUrl
+      size=20 name=availability.matches.edges.firstObject.node.user.firstName fontFamily="PT Sans, sans-serif"}}
+  </div>
+</div>
+{{/if}}
+
+<div class="time-table-occurrence-resize-handle"></div>

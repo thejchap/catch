@@ -8,8 +8,8 @@ module Catch
 
         def perform(ids)
           if ids.length == 1
-            id = ids.first
-            fulfill id, @model.fetch(id)
+            record = @model.fetch ids.first
+            fulfill record.id, record
           else
             fetch_multi ids
           end

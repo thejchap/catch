@@ -14,8 +14,8 @@
 
 {{#link-to 'me.account' tagName='div' class='d-flex justify-content-center py-2 prof-pic-wrapper'}}
   <div class="col-4 p-2">
-    <img src={{currentUser.data.pictureUrl}} alt="" class='img-fluid
-    rounded-circle'>
+    {{ember-initials class='mr-3 rounded-circle' image=currentUser.data.pictureUrl
+    size=60 name=currentUser.data.firstName fontFamily="PT Sans, sans-serif"}}
   </div>
 {{/link-to}}
 
