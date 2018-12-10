@@ -7,6 +7,7 @@ module Catch
         field :last_name, String, null: true
         field :facebook_id, String, null: true
         field :picture_url, String, null: true
+        field :settings, Types::Settings, null: false
       end
     end
   end

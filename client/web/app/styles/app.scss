@@ -92,14 +92,14 @@ $theme-colors: (
 }
 
 .sidebar .nav-link {
-  font-weight: 500;
-  color: #333;
+  font-weight: bold;
+  color: gray("800");
   border-left: 4px solid transparent;
 }
 
 .sidebar .nav-link .feather {
   margin-right: 4px;
-  color: gray("500");
+  color: gray("600");
 }
 
 .sidebar .nav-link.active {

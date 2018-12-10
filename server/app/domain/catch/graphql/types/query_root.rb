@@ -5,10 +5,10 @@ module Catch
         field :nodes,           field: ::GraphQL::Relay::Node.plural_field
         field :node,            field: ::GraphQL::Relay::Node.field
         field :me,              Types::User, null: false
-        field :availabilities,  [Types::Availability], null: false
+        field :availabilities,  [Types::Availability], null: false, extras: %i[irep_node]
 
-        def availabilities
-          Loaders::IdentityCacheAssociationLoader.for(::User, :availabilities).load me.id
+        def availabilities(irep_node:)
+          services[:my_availabilities].call(user: me).value
         end
 
         def me

@@ -7,6 +7,7 @@
 #  facebook_data :jsonb
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  settings      :jsonb
 #
 
 require 'rails_helper'

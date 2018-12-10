@@ -12,6 +12,13 @@ const query = gql`
       firstName
       lastName
       pictureUrl
+      settings {
+        activitiesBouldering
+        activitiesLead
+        activitiesTopRope
+        activitiesWorkout
+        location
+      }
     }
   }
 `;

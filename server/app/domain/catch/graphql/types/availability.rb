@@ -13,7 +13,7 @@ module Catch
         end
 
         def matches
-          Loaders::IdentityCacheAssociationLoader.for(::User, :availabilities).load object.user_id
+          []
         end
       end
     end
