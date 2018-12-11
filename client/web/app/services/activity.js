@@ -35,6 +35,15 @@ const META = {
 export default Service.extend({
   apollo: service(),
 
+  build(name) {
+    const meta = META[name];
+
+    return {
+      name,
+      ...meta
+    }
+  },
+
   all() {
     return this.apollo.query({ query }, '__type.enumValues').then((result) => {
       return result.map((value) => {

@@ -1,22 +1,26 @@
 <div class="card-body px-0 py-3 d-flex flex-row">
-<div class='px-4 d-flex flex-column justify-content-center'>
-  <div class="rounded-circle border {{if selected 'border-success'}} bg-{{if selected 'success' 'light'}} d-flex align-items-center
-    justify-content-center" style='height: 40px; width: 40px;'>
-    {{#if selected}}
-      {{feather-icon icon='check' class='text-white'}}
-    {{else}}
-      {{feather-icon icon='check' class='text-black-50'}}
-    {{/if}}
+  <div
+    class="px-4 d-flex flex-column justify-content-center"
+  >
+    <div
+      class="rounded-circle border {{if selected "border-success"}} bg-{{if selected "success" "light"}} d-flex align-items-center justify-content-center"
+      style="height: 40px; width: 40px;"
+    >
+      {{#if selected}}
+        {{feather-icon icon="check" class="text-white"}}
+      {{else}}
+        {{feather-icon icon="check" class="text-black-50"}}
+      {{/if}}
+    </div>
   </div>
-</div>
-<div class='pr-4 d-flex flex-column justify-content-center'>
-  <div>
-    <h5 class="card-title m-0">
-      {{model.label}}
-    </h5>
-    <p class="card-text m-0">
-      {{model.copy}}
-    </p>
+  <div class="pr-4 d-flex flex-column justify-content-center">
+    <div>
+      <h5 class="card-title m-0">
+        {{model.label}}
+      </h5>
+      <p class="card-text m-0">
+        {{model.copy}}
+      </p>
+    </div>
   </div>
-</div>
 </div>

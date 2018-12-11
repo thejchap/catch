@@ -10,6 +10,8 @@ fragment AvailabilityFragment on Availability {
     edges {
       rank
       bestMatch
+      activitiesIntersection
+      activitiesIntersectionCount
       node {
         id
         startsAt

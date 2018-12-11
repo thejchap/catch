@@ -13,7 +13,7 @@ module Catch
         def object_from_id(gid, _query_context)
           data = GlobalID.parse gid
           return nil if data.blank?
-          data.model_class.find data.model_id
+          data.model_class.fetch data.model_id
         end
 
         def resolve_type(_type, object, _context)

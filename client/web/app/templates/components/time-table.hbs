@@ -1,8 +1,9 @@
 {{#time-table/table
   onSelectTimeSlot=(action "addOccurrence")
   model=model
-  timeSlotHeight=timeSlotHeight as |day table|}}
-
+  timeSlotHeight=timeSlotHeight
+as |day table|
+}}
   {{#each day.occurrences as |occurrence|}}
     {{#if hasBlock}}
       {{yield occurrence table this}}
@@ -11,19 +12,21 @@
         model=occurrence
         timeSlotHeight=timeSlotHeight
         timeSlotDuration=timeSlotDuration
-        onUpdate=(action this.attrs.onUpdateOccurrence)
-        onSelect=(action this.attrs.onSelectOccurrence)
-        table=table}}
+        onUpdate=(action "onUpdateOccurrence" target=this)
+        onSelect=(action "onSelectOccurrence" target=this)
+        table=table
+      }}
     {{/if}}
   {{/each}}
 
   {{#if day.occurrencePreview}}
     {{time-table/table/occurrence
-      class='time-table-occurrence-preview'
+      class="time-table-occurrence-preview"
       model=day.occurrencePreview
       timeSlotHeight=timeSlotHeight
       timeSlotDuration=timeSlotDuration
-      table=table}}
+      table=table
+    }}
   {{/if}}
 
 {{/time-table/table}}

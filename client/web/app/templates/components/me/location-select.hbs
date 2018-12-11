@@ -1,0 +1,38 @@
+<select
+  class="form-control mb-3"
+  onchange={{action "locationSelected" value="target.value"}}
+>
+  <option disabled selected={{noSelection}}>Please select a location</option>
+
+  {{#each all as |location|}}
+    <option
+      value={{location.modelId}}
+      selected={{if (eq location.modelId activeSelection.modelId) true false}}
+    >
+      {{location.name}}
+    </option>
+  {{/each}}
+</select>
+{{#g-map lat=center.lat lng=center.lng disableDefaultUI=true zoom=8 as |g|}}
+  {{#each all as |location|}}
+    {{g.marker
+      lat=location.lat
+      lng=location.lng
+      onClick=(action "locationSelected" location.modelId)
+    }}
+  {{/each}}
+{{/g-map}}
+<div class="row mt-3">
+  <div class="col-md-9 d-flex align-items-center text-muted">
+  </div>
+  <div class="col-md-3">
+    <button
+      type="submit"
+      class="btn btn-primary btn-lg btn-block pull-right"
+      disabled={{saveDisabled}}
+      {{action "save"}}
+    >
+      Save
+    </button>
+  </div>
+</div>

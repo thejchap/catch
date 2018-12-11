@@ -46,7 +46,8 @@ export default Service.extend({
       mutation,
       variables,
       update,
-      optimisticResponse
+      optimisticResponse,
+      refetchQueries: ['availabilities']
     };
 
     return this.proxy.mutate(opts, 'availabilityCreate.availability');
@@ -67,7 +68,8 @@ export default Service.extend({
     const opts = {
       mutation,
       variables,
-      optimisticResponse
+      optimisticResponse,
+      refetchQueries: ['availabilities']
     };
 
     return this.proxy.mutate(opts, 'availabilityUpdate.availability');

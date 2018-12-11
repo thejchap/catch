@@ -2,19 +2,27 @@ module Catch
   module Availability
     class MatchesForLocation < ::Service::Base
       class AvailabilityMatch
-        attr_reader :node, :parent, :jaccard, :rank, :day
+        attr_reader :node, :parent, :jaccard, :rank, :day, :activities_intersection
 
-        def initialize(node:, parent:, jaccard:, rank:)
-          @node     = node
-          @parent   = parent
-          @jaccard  = jaccard
-          @rank     = rank
-          @day      = node.day
+        def initialize(node:, parent:, jaccard:, rank:, activities_intersection:)
+          @node = node
+          @parent = parent
+          @jaccard = jaccard
+          @rank = rank
+          @activities_intersection = activities_intersection
+        end
+
+        def day
+          node.day
+        end
+
+        def activities_intersection_count
+          activities_intersection.length
         end
       end
 
       def call(location_id:)
-        return failure(nil) if location_id.blank?
+        return success({}) if location_id.blank?
         success build_graph(location_id)
       end
 
@@ -27,6 +35,12 @@ module Catch
           obj[avail.id] = avail
         end
 
+        users = ::User.fetch_multi availabilities.map(&:user_id).uniq
+
+        users_hash = users.each_with_object({}) do |user, obj|
+          obj[user.id] = user
+        end
+
         week = availabilities.group_by(&:day).transform_values do |array|
           array.map { |avail| [avail.id, avail.range] }
         end
@@ -35,14 +49,29 @@ module Catch
           graph = ::DataStructures::OverlappingIntervalGraph.build Hash[day]
 
           graph.each_with_object({}) do |(parent_id, edges), hash|
-            hash[parent_id] = edges.values.each_with_index.map do |edge, rank|
-              AvailabilityMatch.new(
-                parent:   avails_hash[parent_id],
-                node:     avails_hash[edge.dig(:node, :id)],
-                jaccard:  edge[:jaccard],
-                rank:     rank
+            rank = 0
+
+            hash[parent_id] = edges.values.map do |edge|
+              parent = avails_hash[parent_id]
+              node = avails_hash[edge.dig(:node, :id)]
+              parent_user = users_hash[parent.user_id]
+              node_user = users_hash[node.user_id]
+              activities_intersection = (parent_user.settings_activities || []) & (node_user.settings_activities || [])
+
+              next if activities_intersection.empty?
+
+              match = AvailabilityMatch.new(
+                parent: parent,
+                node: node,
+                jaccard: edge[:jaccard],
+                rank: rank,
+                activities_intersection: activities_intersection
               )
-            end
+
+              rank += 1
+
+              match
+            end.compact
           end
         end
       end

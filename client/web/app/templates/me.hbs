@@ -1,7 +1,31 @@
 <div class="row no-gutters">
   <div class="col-md-2 d-md-block d-none sidebar">
     <div class="sidebar-sticky">
-      {{partial 'me/side-nav'}}
+      <div class="row justify-content-center mb-3">
+        <div class="col-4 p-2">
+          {{#link-to 'index'}}
+            {{shoe-icon color="#dd052b"}}
+          {{/link-to}}
+        </div>
+      </div>
+
+      {{#side-nav}}
+        {{side-nav/item title="Schedule" icon="home" path="me.schedule"}}
+        {{side-nav/item title="Activities" icon="list" path="me.activities"}}
+        {{side-nav/item title="Location" icon="map-pin" path="me.location"}}
+      {{/side-nav}}
+
+      {{#link-to 'me.account' tagName='div' class='d-flex justify-content-center py-2 prof-pic-wrapper'}}
+        <div class="col-4 p-2">
+          {{ember-initials
+            class='mr-3 rounded-circle'
+            image=currentUser.data.pictureUrl
+            size=60
+            name=currentUser.data.firstName
+            fontFamily="PT Sans, sans-serif"
+          }}
+        </div>
+      {{/link-to}}
     </div>
   </div>
   <main role='main' class="col-md-10 ml-sm-auto">

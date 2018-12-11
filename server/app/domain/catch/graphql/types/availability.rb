@@ -14,7 +14,7 @@ module Catch
 
         def matches
           matches_graph.then do |graph_result|
-            graph_result.value.dig day, model_id
+            graph_result.value.dig(day, model_id) || []
           end
         end
 

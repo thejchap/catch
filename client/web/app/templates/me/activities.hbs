@@ -1,17 +1,14 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6 offset-md-2">
-      <div class="pb-1 mb-3 mt-4 border-bottom">
+      <div class="pb-1 mb-2 mt-4">
         <h3>Activities</h3>
+        <small class='text-muted'>You will be matched with climbing partners based your selected
+        activities. You can change these at any time and your matches will be
+        updated automatically.</small>
       </div>
-      {{#me/activities-form selection=activitySettings onSave=(action 'save') as |form|}}
-        {{#each model as |activity|}}
-          {{me/activities-form/activity
-            model=activity
-            action=(action 'activityToggled' target=form)
-            selection=form.activeSelection}}
-        {{/each}}
-      {{/me/activities-form}}
+
+      {{me/activities-form all=model selection=activitySettings onSave=(action 'save')}}
     </div>
   </div>
 </div>

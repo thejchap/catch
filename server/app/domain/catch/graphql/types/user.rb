@@ -8,9 +8,10 @@ module Catch
         field :facebook_id, String, null: true
         field :picture_url, String, null: true
         field :settings, Types::Settings, null: false
-        field :location, Types::Location, null: false
+        field :location, Types::Location, null: true
 
         def location
+          return if object.settings_location.blank?
           Loaders::IdentityCacheLoader.for(::Location).load object.settings_location
         end
       end

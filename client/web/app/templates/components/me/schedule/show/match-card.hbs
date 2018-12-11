@@ -1,0 +1,41 @@
+{{#if model.bestMatch}}
+  <div class="card-header border-success bg-success text-white">
+    <small>
+      Best Match
+    </small>
+  </div>
+{{/if}}
+<div class="card-body">
+  <div>
+    {{ember-initials
+      class="mb-3 rounded-circle"
+      image=user.pictureUrl
+      size=60
+      name=user.firstName
+      fontFamily="PT Sans, sans-serif"
+    }}
+  </div>
+  <div>
+    <h5 class="card-title mb-0">
+      {{user.firstName}}
+    </h5>
+    <p class='card-text'>
+    {{format-minutes node.startsAt}} -
+    {{format-minutes node.endsAt}}
+    </p>
+  </div>
+</div>
+<ul class="list-group list-group-flush">
+  {{#each activitiesIntersection as |activity|}}
+    <li class="list-group-item">
+      {{feather-icon icon="check" class='mr-1'}}
+      {{activity.label}}
+    </li>
+  {{/each}}
+</ul>
+<div class="card-footer">
+    <a href="#" class="btn btn-primary btn-block">
+      {{feather-icon icon='message-square' class='mr-1'}}
+      Chat
+    </a>
+</div>

@@ -12,7 +12,12 @@
 
     {{content-for "head"}}
 
-    <link rel="preload" href="https://d158rsbl5gvkw0.cloudfront.net/shared/img/et-bg-dark.jpg" as="image">
+    <script charset="utf-8" type='text/javascript' async defer>
+      if (window.location.pathname === '/') {
+        document.write('<link rel="preload" href="https://d158rsbl5gvkw0.cloudfront.net/shared/img/et-bg-dark.jpg" as="image">');
+      }
+    </script>
+
     <link integrity="" rel="stylesheet" href="{{rootURL}}assets/catch.css">
 
     {{content-for "head-footer"}}

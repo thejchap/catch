@@ -11,15 +11,13 @@ export default Service.extend({
   store: service(),
   apollo: service(),
 
-  update(attrs) {
+  update(variables) {
     const mutation = meUpdate;
-    const { id } = this.data;
-    const { settingsActivities } = attrs
-    const variables = { id, settingsActivities }
 
     const opts = {
       mutation,
-      variables
+      variables,
+      refetchQueries: ['availabilities']
     };
 
     return this.apollo.mutate(opts, 'meUpdate.me').then((data) => {

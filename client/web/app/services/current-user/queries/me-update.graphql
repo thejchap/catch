@@ -1,7 +1,7 @@
 #import 'catch/services/current-user/queries/me-fragment'
 
-mutation meUpdate($settingsActivities: [Activity!]!) {
-  meUpdate(input: { settingsActivities: $settingsActivities }) {
+mutation meUpdate($settingsActivities: [Activity!], $settingsLocation: String) {
+  meUpdate(input: { settingsActivities: $settingsActivities, settingsLocation: $settingsLocation }) {
     me {
       ...MeFragment
     }

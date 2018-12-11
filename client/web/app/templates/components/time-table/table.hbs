@@ -1,8 +1,8 @@
-<div class='row no-gutters time-table-header border-bottom'>
-  <div class='time-table-header-col time-table-first-col'>
+<div class="row no-gutters time-table-header border-bottom">
+  <div class="time-table-header-col time-table-first-col">
   </div>
   {{#each days as |day|}}
-    <div class='col border-left d-flex time-table-header-col time-table-day-col'>
+    <div class="col border-left d-flex time-table-header-col time-table-day-col">
       <div class="d-flex p-2 align-items-center">
         <div>
           {{day.label}}
@@ -10,15 +10,14 @@
       </div>
     </div>
   {{/each}}
-  <div class='scroll-pad'></div>
+  <div class="scroll-pad"></div>
 </div>
 
 <div class="time-table-content-wrapper">
   <div class="time-table-content row no-gutters" id='time-table-content'>
-    <div class='time-table-first-col'>
+    <div class="time-table-first-col">
       {{#each labeledTimeSlots as |timeSlot index|}}
-        <div style={{timeSlotLabelStyle}} class='pr-2 pt-0 d-flex
-          justify-content-end align-items-start time-slot-label'>
+        <div style={{timeSlotLabelStyle}} class="pr-2 pt-0 d-flex justify-content-end align-items-start time-slot-label">
           {{#unless timeSlot.isZero}}
             <small>
               {{timeSlot.label}}
@@ -28,9 +27,9 @@
       {{/each}}
     </div>
     {{#each days as |day|}}
-      <div class='col border-left'>
+      <div class="col border-left">
         {{#each timeSlots as |timeSlot|}}
-        <div style={{timeSlotStyle}}  class='{{if timeSlot.isHour "border-top"}} available-time-slot'></div>
+          <div style={{timeSlotStyle}}  class="{{if timeSlot.isHour "border-top"}} available-time-slot"></div>
         {{/each}}
 
         {{yield day this}}

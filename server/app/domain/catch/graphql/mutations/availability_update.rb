@@ -22,7 +22,7 @@ module Catch
 
         def resolve(record:, day:, starts_at:, ends_at:)
           result = services[:update].call(
-            record: record,
+            record: ::Availability.lock.find(record.id),
             day:    day,
             range:  starts_at..ends_at,
           )

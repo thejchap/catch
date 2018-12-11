@@ -13,10 +13,10 @@ export default Component.extend({
     this.selection.forEach((item) => arr.pushObject(item));
     return arr;
   }),
-  isDirty: computed('selection.[]', 'activeSelection.[]', function() {
+  isClean: computed('selection.[]', 'activeSelection.[]', function() {
     return compare(this.selection.sort(), this.activeSelection.sort()) === 0;
   }),
-  saveDisabled: alias('isDirty'),
+  saveDisabled: alias('isClean'),
   actions: {
     save() {
       this.onSave(this.activeSelection.sort());

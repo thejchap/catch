@@ -3,7 +3,8 @@ module Catch
     module Mutations
       class MeUpdate < Base
         null true
-        argument :settings_activities, [Types::Activity], required: true
+        argument :settings_activities, [Types::Activity], required: false
+        argument :settings_location, String, required: false
         field :me, Types::User, null: true
         field :errors, [String], null: false
 
@@ -17,10 +18,10 @@ module Catch
           true
         end
 
-        def resolve(settings_activities:)
+        def resolve(attrs)
           result = services[:update].call(
             record: ::User.lock.find(current_user.id),
-            settings_activities: settings_activities
+            attributes: attrs
           )
 
           return { me: result.value, errors: [] } if result.success?

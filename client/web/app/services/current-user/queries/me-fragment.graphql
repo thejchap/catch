@@ -4,6 +4,8 @@ fragment MeFragment on User {
   lastName
   pictureUrl
   location {
+    id
+    modelId
     name
     lat
     lng

@@ -1,68 +1,46 @@
 <div class="pt-3">
-  {{link-to 'Schedule' 'me.schedule' class='mb-1 text-muted'}}
-  <h3 class='mb-4'>{{format-day model.day}}, {{format-minutes model.startsAt}} - {{format-minutes
-    model.endsAt}}</h3>
-  <div class='row no-gutters'>
+  {{link-to "Schedule" "me.schedule" class="mb-1 text-muted"}}
+  <div class="d-flex justify-content-between mb-4 pr-4">
+    <div>
+      <h3>
+        {{format-day model.day}}, {{format-minutes model.startsAt}} - {{format-minutes model.endsAt}}
+      </h3>
+    </div>
+    <div>
+      <a href="#" class='btn btn-secondary'>
+        {{feather-icon icon="trash" class="mr-1"}}
+        Delete
+      </a>
+    </div>
+  </div>
+  <div class="row no-gutters">
     <div class="col-md-8">
-      <ul class="list-group bg-white mb-3">
+      <div class="card-columns">
         {{#each model.matches.edges as |edge|}}
-        <li class="list-group-item">
-          <div class="media">
-            {{ember-initials class='mr-3 rounded-circle' image=edge.node.user.pictureUrl
-            size=48 name=edge.node.user.firstName fontFamily="PT Sans, sans-serif"}}
-            <div class="media-body">
-              <div class="row">
-                <div class="col-md-4 d-flex align-items-center">
-                  <div>
-                    <h5 class='mb-0 mt-0'>{{edge.node.user.firstName}}</h5>
-                  </div>
-                </div>
-                <div class="col-md-5 d-flex align-items-center">
-                  <ul class="list-unstyled">
-                    <li>
-                      <small>
-                      {{feather-icon icon='clock' class='mr-2'}}
-                      {{format-minutes edge.node.startsAt}} -
-                      {{format-minutes edge.node.endsAt}}
-                      </small>
-                    </li>
-                    <li>
-                      <small>
-                      {{feather-icon icon='list' class='mr-2'}}
-                      Boulder, Top Rope
-                      </small>
-                    </li>
-                  </ul>
-                </div>
-                <div class="col-md-3 d-flex align-items-center">
-                  <a href="#" class='btn btn-primary btn btn-block'>
-                    {{feather-icon icon='message-square' class='mr-1'}}
-                    Chat
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
+          {{me/schedule/show/match-card model=edge}}
         {{/each}}
-      </ul>
-      <div class="d-md-flex d-none justify-content-end">
-        <a href="#" class='text-black-50'>Delete</a>
       </div>
     </div>
     <div class="col-md-4 px-4">
-      {{#g-map lat=currentUser.data.location.lat
-      draggable=false
-      lng=currentUser.data.location.lng zoom=11 disableDefaultUI=true as |g|}}
-      {{g.marker lat=currentUser.data.location.lat
-      lng=currentUser.data.location.lng}}
+      {{#g-map
+        lat=currentUser.data.location.lat
+        draggable=false
+        lng=currentUser.data.location.lng
+        zoom=11
+        disableDefaultUI=true
+        as |g|
+      }}
+        {{g.marker
+          lat=currentUser.data.location.lat
+          lng=currentUser.data.location.lng
+        }}
       {{/g-map}}
       <div class="text-center mt-2 text-muted">
-      <small>
-            {{feather-icon icon='map-pin' class='mr-1'}}
-            {{currentUser.data.location.name}}
-            ({{link-to 'change' 'me.location'}})
-      </small>
+        <small>
+          {{feather-icon icon="map-pin" class="mr-1"}}
+          {{currentUser.data.location.name}}
+          ({{link-to "change" "me.location"}})
+        </small>
       </div>
     </div>
   </div>
