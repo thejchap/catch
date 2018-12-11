@@ -5,10 +5,15 @@ module Catch
         field :nodes,           field: ::GraphQL::Relay::Node.plural_field
         field :node,            field: ::GraphQL::Relay::Node.field
         field :me,              Types::User, null: false
-        field :availabilities,  [Types::Availability], null: false, extras: %i[irep_node]
+        field :availabilities,  [Types::Availability], null: false
+        field :locations,       [Types::Location], null: false
 
-        def availabilities(irep_node:)
+        def availabilities
           services[:my_availabilities].call(user: me).value
+        end
+
+        def locations
+          ::Location.all
         end
 
         def me
@@ -17,7 +22,7 @@ module Catch
 
         def services
           {
-            my_availabilities: ::Catch::Availability::MyAvailabilities
+            my_availabilities:  ::Catch::Availability::MyAvailabilities
           }
         end
       end

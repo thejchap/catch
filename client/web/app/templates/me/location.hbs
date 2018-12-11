@@ -1,5 +1,29 @@
-<div class="pt-3 px-4 schedule-index d-flex flex-column">
-  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-    <h2>Location</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-2">
+      <div class="pb-1 mb-3 mt-4 border-bottom">
+        <h3>Location</h3>
+      </div>
+      <select class='form-control mb-3' onchange={{action "selectLocation" value="target.value"}}>
+        <option disabled>Please select a location</option>
+        {{#each model as |location|}}
+          <option value={{location.modelId}}>{{location.name}}</option>
+        {{/each}}
+      </select>
+      {{#g-map lat=currentUser.data.location.lat
+      disableDefaultUI=true
+      draggable=false
+      lng=currentUser.data.location.lng zoom=11 as |g|}}
+      {{g.marker lat=currentUser.data.location.lat
+      lng=currentUser.data.location.lng}}
+      {{/g-map}}
+      <div class="row mt-3">
+        <div class="col-md-9 d-flex align-items-center text-muted">
+        </div>
+        <div class="col-md-3">
+          <button type="submit" class="btn btn-primary btn-block pull-right">Save</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

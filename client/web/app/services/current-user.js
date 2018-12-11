@@ -12,12 +12,16 @@ const query = gql`
       firstName
       lastName
       pictureUrl
+      location {
+        name
+        lat
+        lng
+      }
       settings {
         activitiesBouldering
         activitiesLead
         activitiesTopRope
         activitiesWorkout
-        location
       }
     }
   }

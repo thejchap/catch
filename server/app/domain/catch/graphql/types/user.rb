@@ -8,6 +8,11 @@ module Catch
         field :facebook_id, String, null: true
         field :picture_url, String, null: true
         field :settings, Types::Settings, null: false
+        field :location, Types::Location, null: false
+
+        def location
+          Loaders::IdentityCacheLoader.for(::Location).load object.settings_location
+        end
       end
     end
   end

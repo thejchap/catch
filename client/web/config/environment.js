@@ -21,6 +21,10 @@ module.exports = function(environment) {
       prelaunch: true
     },
 
+    'ember-google-maps': {
+      key: 'AIzaSyDGrWUCAYd7hlNyh5npkazODQFfWLctTSg'
+    },
+
     apollo: {
       apiURL: '/api/graphql',
       // Optionally, set the credentials property of the Fetch Request interface

@@ -11,4 +11,13 @@
 #
 
 class Location < ApplicationRecord
+  include IdentityCache
+
+  def lat
+    latlng&.x
+  end
+
+  def lng
+    latlng&.y
+  end
 end

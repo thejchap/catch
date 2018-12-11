@@ -7,6 +7,9 @@ module.exports = function(defaults) {
     'ember-cli-bootstrap-4': {
       js: null
     },
+    'ember-google-maps': {
+      only: ['marker']
+    },
     fingerprint: {
       exclude: ['et-bg-dark.jpg'],
       prepend: 'https://d158rsbl5gvkw0.cloudfront.net/' + EmberApp.env() + '/client/web/ember/build/'
