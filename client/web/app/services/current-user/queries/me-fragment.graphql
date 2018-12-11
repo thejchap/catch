@@ -1,0 +1,14 @@
+fragment MeFragment on User {
+  id
+  firstName
+  lastName
+  pictureUrl
+  location {
+    name
+    lat
+    lng
+  }
+  settings {
+    activities
+  }
+}

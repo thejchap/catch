@@ -4,9 +4,12 @@
       <div class="pb-1 mb-3 mt-4 border-bottom">
         <h3>Activities</h3>
       </div>
-      {{#me/activities-form selection=activitySettings as |form|}}
+      {{#me/activities-form selection=activitySettings onSave=(action 'save') as |form|}}
         {{#each model as |activity|}}
-          {{me/activities-form/activity model=activity selection=form.selection}}
+          {{me/activities-form/activity
+            model=activity
+            action=(action 'activityToggled' target=form)
+            selection=form.activeSelection}}
         {{/each}}
       {{/me/activities-form}}
     </div>

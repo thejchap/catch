@@ -1,20 +1,32 @@
 import Component from '@ember/component';
-import { set } from '@ember/object';
+import { set, computed } from '@ember/object';
 import { A } from '@ember/array';
+import { compare } from '@ember/utils';
+
+const { alias } = computed;
 
 export default Component.extend({
   tagName: 'ul',
   classNames: ['list-group'],
-  init() {
-    this._super(...arguments);
-
-    let selection = A();
-
-    this.selection.forEach((item) => {
-      selection.pushObject(item);
-    });
-
-    set(this, 'userSelection', this.selection);
-    set(this, 'selection', selection);
-  },
+  activeSelection: computed('selection.[]', function() {
+    let arr = A();
+    this.selection.forEach((item) => arr.pushObject(item));
+    return arr;
+  }),
+  isDirty: computed('selection.[]', 'activeSelection.[]', function() {
+    return compare(this.selection.sort(), this.activeSelection.sort()) === 0;
+  }),
+  saveDisabled: alias('isDirty'),
+  actions: {
+    save() {
+      this.onSave(this.activeSelection.sort());
+    },
+    activityToggled(activity, selected) {
+      if (selected) {
+        this.activeSelection.pushObject(activity);
+      } else {
+        this.activeSelection.removeObject(activity);
+      }
+    }
+  }
 });

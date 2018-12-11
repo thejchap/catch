@@ -1,0 +1,7 @@
+#import 'catch/services/current-user/queries/me-fragment'
+
+query me {
+  me {
+    ...MeFragment
+  }
+}

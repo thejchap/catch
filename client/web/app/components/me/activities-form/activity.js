@@ -9,6 +9,6 @@ export default Component.extend({
     return this.selection.includes(this.model.name);
   }),
   click() {
-    console.log('clicked');
+    this.action(this.model.name, !this.selected);
   }
 });
