@@ -393,3 +393,11 @@ $theme-colors: (
 .ember-google-map {
   height: 300px;
 }
+
+.activities-form-activity {
+  cursor: pointer;
+
+  &:hover {
+    @extend .bg-light;
+  }
+}

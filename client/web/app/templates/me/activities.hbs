@@ -4,43 +4,11 @@
       <div class="pb-1 mb-3 mt-4 border-bottom">
         <h3>Activities</h3>
       </div>
-      <form {{action 'save' on='submit'}}>
-        <div class="form-group form-check">
-          {{input type="checkbox" class='form-check-input' name="activities_lead" id='activities_lead' checked=settings.activitiesLead}}
-          <label class="form-check-label" for="activities_lead">Lead</label>
-          <small class="form-text text-muted">
-            Get matched with other sport climbers who are ready, willing and
-            able to catch your whippers!
-          </small>
-        </div>
-        <div class="form-group form-check">
-          {{input type="checkbox" class='form-check-input' name="activities_top_rope" id='activities_top_rope' checked=settings.activitiesTopRope}}
-          <label class="form-check-label" for="activities_top_rope">Top Rope</label>
-          <small class="form-text text-muted">
-            Find top rope partners for great post-work gym sessions.
-          </small>
-        </div>
-        <div class="form-group form-check">
-          {{input type="checkbox" class='form-check-input' name="activities_bouldering" id='activities_bouldering' checked=settings.activitiesBouldering}}
-          <label class="form-check-label" for="activities_bouldering">Bouldering</label>
-          <small class="form-text text-muted">
-            Sometimes a partner to give you a good spot and some words of
-            motivation can work wonders for your bouldering head game!
-          </small>
-        </div>
-        <div class="form-group form-check">
-          {{input type="checkbox" class='form-check-input' name="activities_workout" id='activities_workout' checked=settings.activitiesWorkout}}
-          <label class="form-check-label" for="activities_workout">Workout/Classes</label>
-          <small class="form-text text-muted">
-            Looking for a spotter or yoga buddy? Look no further!
-          </small>
-        </div>
-        <div class="form-group row justify-content-end mt-3">
-          <div class="col-md-3">
-          <button type="submit" class="btn btn-primary btn-block pull-right">Save</button>
-          </div>
-        </div>
-      </form>
+      {{#me/activities-form selection=activitySettings as |form|}}
+        {{#each model as |activity|}}
+          {{me/activities-form/activity model=activity selection=form.selection}}
+        {{/each}}
+      {{/me/activities-form}}
     </div>
   </div>
 </div>

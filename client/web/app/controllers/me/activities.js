@@ -6,5 +6,5 @@ const { reads } = computed;
 
 export default Controller.extend({
   currentUser: service(),
-  settings: reads('currentUser.data.settings')
+  activitySettings: reads('currentUser.data.settings.activities')
 });

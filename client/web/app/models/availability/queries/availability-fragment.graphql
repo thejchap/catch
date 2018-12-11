@@ -18,10 +18,7 @@ fragment AvailabilityFragment on Availability {
           firstName
           pictureUrl
           settings {
-            activitiesBouldering
-            activitiesLead
-            activitiesWorkout
-            activitiesTopRope
+            activities
           }
         }
       }

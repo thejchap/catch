@@ -18,10 +18,7 @@ const query = gql`
         lng
       }
       settings {
-        activitiesBouldering
-        activitiesLead
-        activitiesTopRope
-        activitiesWorkout
+        activities
       }
     }
   }

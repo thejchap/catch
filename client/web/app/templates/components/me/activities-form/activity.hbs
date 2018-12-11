@@ -1,0 +1,18 @@
+<div class="card-body px-0 py-3 d-flex flex-row">
+<div class='px-4 d-flex flex-column justify-content-center'>
+  <div class="rounded-circle bg-{{if selected 'success' 'light'}} d-flex align-items-center
+    justify-content-center" style='height: 40px; width: 40px;'>
+    {{feather-icon icon='check' class=(if selected 'text-white' 'text-gray')}}
+  </div>
+</div>
+<div class='pr-4 d-flex flex-column justify-content-center'>
+  <div>
+    <h5 class="card-title m-0">
+      {{model.name}}
+    </h5>
+    <p class="card-text m-0">
+      Test Text
+    </p>
+  </div>
+</div>
+</div>
