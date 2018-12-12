@@ -15,7 +15,8 @@ module Catch
         def matches
           matches_graph.then do |result|
             graph_result = result.value
-            next [] if graph_result.stale?(object.updated_at)
+            time = [object.updated_at, current_user.updated_at].max
+            next [] if graph_result.stale?(time)
             graph_result.graph.dig(day, model_id) || []
           end
         end
