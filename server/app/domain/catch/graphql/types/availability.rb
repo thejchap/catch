@@ -4,11 +4,12 @@ module Catch
   module GraphQL
     module Types
       class Availability < Model
-        field :day,       Int,    null: false
-        field :starts_at, Int,    null: false
-        field :ends_at,   Int,    null: false
-        field :user,      Types::User, null: false
-        field :matches,   Types::AvailabilityMatchConnection, null: false
+        field :day,         Int,    null: false
+        field :starts_at,   Int,    null: false
+        field :ends_at,     Int,    null: false
+        field :user,        Types::User, null: false
+        field :matches,     Types::AvailabilityMatchConnection, null: false
+        field :activities,  [Types::Activity], null: false
 
         def user
           Loaders::IdentityCacheLoader.for(::User).load object.user_id
@@ -25,6 +26,10 @@ module Catch
             graph: ::Catch::Availability::Matching::Graph,
             filter_policy: ::Catch::Availability::Matching::MatchFilterPolicy
           }
+        end
+
+        def activities
+          user.then(&:settings_activities)
         end
 
         private

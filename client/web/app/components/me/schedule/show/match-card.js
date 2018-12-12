@@ -10,9 +10,14 @@ export default Component.extend({
   classNameBindings: ['model.bestMatch:border-success'],
   node: alias('model.node'),
   user: alias('node.user'),
-  activitiesIntersection: computed('model.activitiesIntersection', function() {
-    return this.model.activitiesIntersection.map((name) => {
-      return this.activity.build(name);
-    });
+  activities: computed('node.activities.[]', 'parent.activities.[]', function() {
+    return this.parent.activities.map((name) => {
+      const activity = this.activity.build(name);
+
+      return {
+        activity,
+        matched: this.node.activities.includes(activity.name)
+      };
+    }).sortBy('matched').reverse();
   })
 });

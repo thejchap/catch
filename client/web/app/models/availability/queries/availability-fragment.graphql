@@ -4,22 +4,20 @@ fragment AvailabilityFragment on Availability {
   startsAt
   endsAt
   modelId
+  activities
   matches {
     any
     count
     edges {
       rank
-      activitiesIntersection
       node {
+        activities
         id
         startsAt
         endsAt
         user {
           firstName
           pictureUrl
-          settings {
-            activities
-          }
         }
       }
     }

@@ -19,10 +19,23 @@
   </div>
 </div>
 <ul class="list-group list-group-flush">
-  {{#each activitiesIntersection as |activity|}}
-    <li class="list-group-item">
-      {{feather-icon icon="check" class='mr-1'}}
-      {{activity.label}}
+  {{#each activities as |proxy|}}
+    <li class="list-group-item d-flex align-items-center py-2 px-3">
+      <div
+        class="rounded-circle border {{if proxy.matched "border-success"}}
+        bg-{{if proxy.matched "success" "light"}} d-flex mr-2 flex-column align-items-center justify-content-center"
+        style="height: 20px; width: 20px;"
+      >
+        {{#if proxy.matched}}
+          {{feather-icon icon="check" class="text-white"}}
+        {{else}}
+          {{feather-icon icon="check" class="text-black-50"}}
+        {{/if}}
+      </div>
+      <div class="{{unless proxy.matched "text-black-50"}} d-flex flex-column
+        align-items-center">
+        {{proxy.activity.label}}
+      </div>
     </li>
   {{/each}}
 </ul>
