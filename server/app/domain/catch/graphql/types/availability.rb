@@ -14,21 +14,27 @@ module Catch
 
         def matches
           matches_graph.then do |graph_result|
-            graph_result.value.dig(day, model_id) || []
+            val = graph_result.value
+            next [] if matches_stale?(val.updated_at)
+            val.graph.dig(day, model_id) || []
           end
         end
 
         def services
           {
-            matches_for_location: ::Catch::Availability::MatchesForLocation
+            matches: ::Catch::Availability::Matching::Graph
           }
         end
 
         private
 
+        def matches_stale?(time)
+          object.updated_at > time
+        end
+
         def matches_graph
           @match_graph ||= Loaders::ServiceResultLoader.for(
-            services[:matches_for_location]
+            services[:matches]
           ).load(location_id: current_user.settings_location)
         end
       end

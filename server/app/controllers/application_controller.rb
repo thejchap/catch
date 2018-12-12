@@ -1,7 +1,8 @@
 class ApplicationController < ActionController::Base
   def index
-    html = services[:index].call.value.html_safe
-    render html: html, layout: false
+    raw = services[:index].call.value
+    head(:no_content) && return if raw.blank?
+    render html: raw.html_safe, layout: false
   end
 
   def services

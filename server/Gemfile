@@ -22,6 +22,7 @@ gem 'rubocop'
 gem 'redis'
 gem 'wolverine'
 gem 'graphql-batch'
+gem 'sidekiq'
 
 group :development, :test do
   gem 'pry'

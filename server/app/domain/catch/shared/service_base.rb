@@ -9,6 +9,10 @@ module Catch
           end
         end
       end
+
+      def redis
+        ::Catch::Redis.redis
+      end
     end
   end
 end

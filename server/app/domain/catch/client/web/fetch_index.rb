@@ -10,6 +10,8 @@ module Catch
 
         def index
           minify wolverine.fetch_index
+        rescue Wolverine::LuaError => e
+          nil
         end
 
         def minify(contents)

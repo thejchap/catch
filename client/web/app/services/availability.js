@@ -77,6 +77,6 @@ export default Service.extend({
 
   watchQuery(proxy) {
     set(this, 'proxy', proxy);
-    return proxy.watchQuery({ query }, 'availabilities');
+    return proxy.watchQuery({ query, pollInterval: 2 * 1000 }, 'availabilities');
   }
 });

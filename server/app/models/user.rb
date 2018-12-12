@@ -29,7 +29,7 @@ class User < ApplicationRecord
     picture: :json
 
   jsonb_accessor :settings,
-    settings_activities: [:integer, array: true, store_key: :activities],
+    settings_activities: [:integer, array: true, store_key: :activities, default: []],
     settings_location:   [:string,  store_key: :location]
 
   def picture_url
