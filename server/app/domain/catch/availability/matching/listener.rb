@@ -6,7 +6,7 @@ module Catch
       class Listener
         class << self
           def user_updated(user_id)
-            user = ::User.fetch user_id
+            user = ::User.find user_id
             write user.settings_location
           end
 
@@ -21,6 +21,7 @@ module Catch
           private
 
           def write(location_id)
+            return if location_id.blank?
             Matching::WriterJob.perform_later location_id: location_id
           end
 
