@@ -13,10 +13,10 @@ module Catch
         end
 
         def matches
-          matches_graph.then do |graph_result|
-            val = graph_result.value
-            next [] if matches_stale?(val.updated_at)
-            val.graph.dig(day, model_id) || []
+          matches_graph.then do |result|
+            graph_result = result.value
+            next [] if graph_result.stale?(object.updated_at)
+            graph_result.graph.dig(day, model_id) || []
           end
         end
 
@@ -27,10 +27,6 @@ module Catch
         end
 
         private
-
-        def matches_stale?(time)
-          object.updated_at > time
-        end
 
         def matches_graph
           @match_graph ||= Loaders::ServiceResultLoader.for(
