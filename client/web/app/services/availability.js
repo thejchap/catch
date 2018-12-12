@@ -46,8 +46,7 @@ export default Service.extend({
       mutation,
       variables,
       update,
-      optimisticResponse,
-      refetchQueries: ['availabilities']
+      optimisticResponse
     };
 
     return this.proxy.mutate(opts, 'availabilityCreate.availability');
@@ -68,8 +67,7 @@ export default Service.extend({
     const opts = {
       mutation,
       variables,
-      optimisticResponse,
-      refetchQueries: ['availabilities']
+      optimisticResponse
     };
 
     return this.proxy.mutate(opts, 'availabilityUpdate.availability');
@@ -77,6 +75,6 @@ export default Service.extend({
 
   watchQuery(proxy) {
     set(this, 'proxy', proxy);
-    return proxy.watchQuery({ query, pollInterval: 2 * 1000 }, 'availabilities');
+    return proxy.watchQuery({ query }, 'availabilities');
   }
 });

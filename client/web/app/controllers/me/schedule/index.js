@@ -32,12 +32,6 @@ export default Controller.extend({
         return;
       }
 
-      setProperties(availability, {
-        'matches.any': false,
-        'matches.count': 0,
-        'matches.edges': []
-      });
-
       next(() => this.send('availabilityUpdated', availability));
     }
   }
