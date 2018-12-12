@@ -14,10 +14,10 @@ module Catch
 
         def matches
           matches_graph.then do |result|
-            graph_result = result.value
-            time = [object.updated_at, current_user.updated_at].max
-            next [] if graph_result.stale?(time)
-            graph_result.graph.dig(day, model_id) || []
+            result.value.fetch day, object, stale_before: [
+              object.updated_at,
+              current_user.updated_at
+            ].min
           end
         end
 

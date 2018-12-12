@@ -12,6 +12,11 @@ module Catch
         def stale?(time)
           time > updated_at
         end
+
+        def fetch(day, object, stale_before:)
+          return [] if stale?(stale_before)
+          graph.dig(day, object.id) || []
+        end
       end
     end
   end
