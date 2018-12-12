@@ -19,16 +19,12 @@ module Catch
         private
 
         def intersecting_time?(match)
-          range = ::DataStructures::Range.new(*match.dig(:node, :range).split("..").map(&:to_i))
+          range = ::DataStructures::Range.new(*match.dig(:node, :range).split('..').map(&:to_i))
           (range & object.range).present?
         end
 
         def intersecting_activities?(match)
           (user.settings_activities & match[:node_activities]).any?
-        end
-
-        def stale?
-          graph.updated_at < object.updated_at
         end
       end
     end

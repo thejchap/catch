@@ -18,7 +18,7 @@ module.exports = function(environment) {
     },
 
     APP: {
-      prelaunch: true
+      prelaunch: false
     },
 
     'ember-google-maps': {
