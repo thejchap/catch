@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Catch
   module GraphQL
     module Types
@@ -6,6 +8,16 @@ module Catch
 
         field :rank, Int, null: false
         field :activities_intersection, [Types::Activity], null: false
+
+        class << self
+          def scope_items(items, context)
+            my_activities = context[:current_resource_owner].settings_activities
+
+            items.select do |item|
+              (item[:node_activities] & my_activities).any?
+            end
+          end
+        end
 
         def activities_intersection
           object.node[:activities_intersection]

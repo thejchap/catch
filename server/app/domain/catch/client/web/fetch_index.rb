@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Catch
   module Client
     module Web
@@ -10,12 +12,12 @@ module Catch
 
         def index
           minify wolverine.fetch_index
-        rescue Wolverine::LuaError => e
+        rescue Wolverine::LuaError
           nil
         end
 
         def minify(contents)
-          contents.gsub /\n+/, ''
+          contents.gsub(/\n+/, '')
         end
       end
     end

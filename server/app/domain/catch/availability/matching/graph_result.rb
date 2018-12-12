@@ -1,21 +1,21 @@
+# frozen_string_literal: true
+
 module Catch
   module Availability
     module Matching
       class GraphResult
         attr_reader :graph, :updated_at
 
-        def initialize(graph, updated_at)
+        def initialize(graph, updated_at = nil)
           @graph = graph
           @updated_at = updated_at
         end
 
-        def stale?(time)
-          time > updated_at
-        end
+        def fetch(day, object, filter_policy: nil)
+          unfiltered = graph.dig(day, object.id) || []
+          return unfiltered if filter_policy.blank?
 
-        def fetch(day, object, stale_before:)
-          return [] if stale?(stale_before)
-          graph.dig(day, object.id) || []
+          unfiltered.select { |match| filter_policy.valid?(match) }
         end
       end
     end

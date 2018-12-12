@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative './support/helpers/service_helpers'
 require_relative './support/helpers/usage_assumptions'
 

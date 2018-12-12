@@ -1,10 +1,14 @@
+# frozen_string_literal: true
+
 require_relative './range'
 require_relative './enriched_interval_tree'
 
 module DataStructures
   class OverlappingIntervalGraph < ::Hash
+    DEFAULT_DEPTH = 5
+
     class << self
-      def build(db)
+      def build(db, depth: DEFAULT_DEPTH)
         graph = new
         tree = ::DataStructures::EnrichedIntervalTree.new(identify: id_proc)
         db.each { |id, range| tree.insert range, meta: { id: id } }
@@ -12,8 +16,8 @@ module DataStructures
         tree.each do |node|
           id = node.meta[:id]
           graph[id] = build_row(
-            db,
             tree,
+            depth,
             id: node.meta[:id],
             range: node.range
           )
@@ -41,14 +45,15 @@ module DataStructures
 
       def coerce_range(range)
         return range if range.is_a?(range_class)
+
         range_class.new range.begin, range.end
       end
 
-      def build_row(db, tree, parent)
+      def build_row(tree, depth, parent)
         prange = parent[:range]
         pid = parent[:id]
 
-        overlapping = tree.search(prange).map do |node|
+        overlapping = tree.search(prange).first(depth).map do |node|
           build_edge prange, node.meta[:id], node.range
         end
 
@@ -56,6 +61,7 @@ module DataStructures
         overlapping.each_with_object({}) do |edge, hash|
           id = edge[:node][:id]
           next if id == pid
+
           hash[id] = edge
         end
       end

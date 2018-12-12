@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Catch
   module GraphQL
     module Mutations
@@ -23,11 +25,12 @@ module Catch
         def resolve(record:, day:, starts_at:, ends_at:)
           result = services[:update].call(
             record: ::Availability.lock.find(record.id),
-            day:    day,
-            range:  starts_at..ends_at,
+            day: day,
+            range: starts_at..ends_at
           )
 
           return { availability: result.value, errors: [] } if result.success?
+
           { availability: nil, errors: result.value }
         end
       end

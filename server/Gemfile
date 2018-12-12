@@ -1,28 +1,30 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.1'
 
-gem 'rails', '5.2.1'
-gem 'pg', '>= 0.18', '< 2.0'
-gem 'puma', '3.11'
-gem 'graphql', '1.8.11'
-gem 'crack'
 gem 'ap'
 gem 'bootsnap', '1.3.2', require: false
+gem 'cityhash'
+gem 'crack'
+gem 'dalli'
 gem 'doorkeeper', '5.0.2'
 gem 'doorkeeper-grants_assertion', '0.2.0'
-gem 'koala', '3.0.0'
-gem 'identity_cache'
-gem 'dalli'
-gem 'cityhash'
-gem 'jsonb_accessor'
-gem 'pundit'
-gem 'rubocop'
-gem 'redis'
-gem 'wolverine'
+gem 'graphql', '1.8.11'
 gem 'graphql-batch'
+gem 'identity_cache'
+gem 'jsonb_accessor'
+gem 'koala', '3.0.0'
+gem 'pg', '>= 0.18', '< 2.0'
+gem 'puma', '3.11'
+gem 'pundit'
+gem 'rails', '5.2.1'
+gem 'redis'
+gem 'rubocop'
 gem 'sidekiq'
+gem 'wolverine'
 
 group :development, :test do
   gem 'pry'
@@ -30,8 +32,8 @@ group :development, :test do
 end
 
 group :development do
+  gem 'annotate'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'annotate'
 end

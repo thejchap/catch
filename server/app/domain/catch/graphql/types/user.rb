@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Catch
   module GraphQL
     module Types
@@ -12,6 +14,7 @@ module Catch
 
         def location
           return if object.settings_location.blank?
+
           Loaders::IdentityCacheLoader.for(::Location).load object.settings_location
         end
       end

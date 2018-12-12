@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require_relative '../../../app/lib/data_structures/interval_tree.rb'
 
@@ -16,12 +18,7 @@ module DataStructures
         2..8
       )
 
-      expect(tree.search(8..10).map(&:range)).to eq([
-        5..10,
-        1..12,
-        2..8,
-        8..16
-      ])
+      expect(tree.search(8..10).map(&:range)).to eq([5..10, 1..12, 2..8, 8..16])
     end
   end
 end

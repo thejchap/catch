@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Catch
   module GraphQL
     module Mutations
@@ -14,7 +16,8 @@ module Catch
           )
 
           return true if result.success?
-          return false, { errors: %i[unauthorized] }
+
+          [false, { errors: %i[unauthorized] }]
         end
       end
     end

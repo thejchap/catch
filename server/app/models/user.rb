@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -18,19 +20,19 @@ class User < ApplicationRecord
   has_many :availabilities
 
   has_many :access_tokens,
-    class_name: 'Doorkeeper::AccessToken',
-    foreign_key: :resource_owner_id,
-    dependent: :delete_all
+           class_name: 'Doorkeeper::AccessToken',
+           foreign_key: :resource_owner_id,
+           dependent: :delete_all
 
   jsonb_accessor :facebook_data,
-    email: :string,
-    first_name: :string,
-    last_name: :string,
-    picture: :json
+                 email: :string,
+                 first_name: :string,
+                 last_name: :string,
+                 picture: :json
 
   jsonb_accessor :settings,
-    settings_activities: [:integer, array: true, store_key: :activities, default: []],
-    settings_location:   [:string,  store_key: :location]
+                 settings_activities: [:integer, array: true, store_key: :activities, default: []],
+                 settings_location: [:string, store_key: :location]
 
   def picture_url
     picture&.dig 'data', 'url'

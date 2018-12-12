@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module DataStructures
   class IntervalTree
     class Node
@@ -33,18 +35,18 @@ module DataStructures
         range.cover? other
       end
 
-      def >(node)
-        low > node.max
+      def >(other)
+        low > other.max
       end
 
-      def <(node)
-        max < node.low
+      def <(other)
+        max < other.low
       end
 
       def each(&block)
-        left.each(&block) unless left.nil?
-        block.call self
-        right.each(&block) unless right.nil?
+        left&.each(&block)
+        yield self
+        right&.each(&block)
       end
 
       def overlaps?(other)

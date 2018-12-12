@@ -27,11 +27,12 @@ ActiveRecord::Schema.define(version: 2018_12_10_145036) do
   end
 
   create_table "locations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "name"
-    t.string "handle"
-    t.point "latlng"
+    t.string "name", null: false
+    t.string "handle", null: false
+    t.point "latlng", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["handle"], name: "index_locations_on_handle", unique: true
   end
 
   create_table "oauth_access_tokens", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

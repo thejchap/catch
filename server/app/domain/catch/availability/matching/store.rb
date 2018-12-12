@@ -1,34 +1,36 @@
+# frozen_string_literal: true
+
 module Catch
   module Availability
     module Matching
       class Store
-        KEY_PREFIX = 'catch:availability:matching:graph:location'.freeze
+        KEY_PREFIX = 'catch:availability:matching:graph:location'
 
         class << self
-          def write(location_id, graph)
-            base_key = "#{KEY_PREFIX}:#{location_id}"
-            now = Time.zone.now
+          def write(location, graph)
+            base_key = to_key location
 
             redis.multi do |txn|
-              txn.set "#{base_key}:updated_at", now
+              txn.set "#{base_key}:updated_at", Time.zone.now
 
               graph.each do |day, hash|
                 txn.set "#{base_key}:day:#{day}", hash.to_json
               end
             end
-
-            Matching::GraphResult.new graph, now
           end
 
-          def read(location_id)
-            return {} if location_id.blank?
+          def read(location)
+            return Matching::GraphResult.new({}) if location.blank?
 
-            keys = (0..6).map { |day| "#{KEY_PREFIX}:#{location_id}:day:#{day}" }
-            keys.push "#{KEY_PREFIX}:#{location_id}:updated_at"
+            base_key = to_key location
+            keys = (0..6).map { |day| "#{base_key}:day:#{day}" }
+            keys.push "#{base_key}:updated_at"
             arr = redis.mget(*keys)
-            updated = Time.zone.parse arr.pop
+            raw_updated = arr.pop
 
-            return {} if arr.compact.empty?
+            return Matching::GraphResult.new({}) if arr.compact.empty?
+
+            updated = Time.zone.parse raw_updated
 
             graph = arr.each_with_object({}).with_index do |(json, hash), day|
               hash[day] = JSON.parse(json).with_indifferent_access
@@ -38,6 +40,10 @@ module Catch
           end
 
           private
+
+          def to_key(location)
+            "#{KEY_PREFIX}:#{location.handle}"
+          end
 
           def redis
             ::Catch::Redis.redis

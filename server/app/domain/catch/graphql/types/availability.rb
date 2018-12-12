@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Catch
   module GraphQL
     module Types
@@ -13,26 +15,29 @@ module Catch
         end
 
         def matches
-          matches_graph.then do |result|
-            result.value.fetch day, object, stale_before: [
-              object.updated_at,
-              current_user.updated_at
-            ].min
-          end
+          return [] if current_user.settings_location.blank?
+
+          graph.then { |result| resolve_graph result.value }
         end
 
         def services
           {
-            matches: ::Catch::Availability::Matching::Graph
+            graph: ::Catch::Availability::Matching::Graph,
+            filter_policy: ::Catch::Availability::Matching::MatchFilterPolicy
           }
         end
 
         private
 
-        def matches_graph
-          @match_graph ||= Loaders::ServiceResultLoader.for(
-            services[:matches]
-          ).load(location_id: current_user.settings_location)
+        def resolve_graph(graph)
+          filter_policy = services[:filter_policy].new object, current_user, graph
+          graph.fetch day, object, filter_policy: filter_policy
+        end
+
+        def graph
+          Loaders::IdentityCacheLoader.for(::Location).load(current_user.settings_location).then do |location|
+            Loaders::ServiceResultLoader.for(services[:graph]).load(location: location)
+          end
         end
       end
     end

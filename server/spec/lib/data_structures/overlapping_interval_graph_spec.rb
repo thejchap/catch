@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require_relative '../../../app/lib/data_structures/overlapping_interval_graph'
 

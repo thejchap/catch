@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../interval_tree/node.rb'
 require_relative '../interval_tree.rb'
 

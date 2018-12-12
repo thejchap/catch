@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Catch
   module GraphQL
     class Schema < ::GraphQL::Schema
@@ -13,6 +15,7 @@ module Catch
         def object_from_id(gid, _query_context)
           data = GlobalID.parse gid
           return nil if data.blank?
+
           data.model_class.fetch data.model_id
         end
 

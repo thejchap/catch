@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Catch
   module Availability
     module Matching
@@ -5,7 +7,8 @@ module Catch
         queue_as :default
 
         def perform(location_id:)
-          services[:write].call location_id: location_id
+          location = ::Location.fetch location_id
+          services[:write].call(location: location).success?
         end
 
         private

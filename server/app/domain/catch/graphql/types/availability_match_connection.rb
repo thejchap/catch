@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Catch
   module GraphQL
     module Types
@@ -8,11 +10,11 @@ module Catch
         field :count, Int, null: false
 
         def any
-          object.nodes.any?
+          nodes.any?
         end
 
         def count
-          object.nodes.length
+          nodes.length
         end
       end
     end

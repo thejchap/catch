@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'ostruct'
 
 module Catch
@@ -11,7 +13,7 @@ module Catch
         class << self
           def proc
             klass = self
-            @proc ||= Proc.new { klass.new(self).resource_owner }
+            @proc ||= proc { klass.new(self).resource_owner }
           end
         end
 
@@ -31,6 +33,7 @@ module Catch
         def fetch_resource_owner
           provider = PROVIDERS[params[:provider]]
           return if provider.blank?
+
           provider.new(params[:assertion]).resource_owner
         end
       end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Catch
   module Authorization
     class Authorize < ::Service::Base
@@ -5,6 +7,7 @@ module Catch
         policy = find_policy user, object
         result = policy.public_send action
         return success(result) if result == true
+
         failure result
       end
 

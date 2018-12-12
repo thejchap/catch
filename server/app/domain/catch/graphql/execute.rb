@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Catch
   module GraphQL
     class Execute < ::Service::Base
@@ -6,8 +8,8 @@ module Catch
 
         success Schema.execute(
           query,
-          variables:      variables,
-          context:        context,
+          variables: variables,
+          context: context,
           operation_name: operation_name
         )
       end

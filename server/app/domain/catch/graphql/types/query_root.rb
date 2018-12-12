@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Catch
   module GraphQL
     module Types
@@ -22,7 +24,7 @@ module Catch
 
         def services
           {
-            my_availabilities:  ::Catch::Availability::MyAvailabilities
+            my_availabilities: ::Catch::Availability::MyAvailabilities
           }
         end
       end

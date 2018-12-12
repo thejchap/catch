@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Catch
   module GraphQL
     module Mutations
@@ -25,6 +27,7 @@ module Catch
           )
 
           return { me: result.value, errors: [] } if result.success?
+
           { availability: nil, errors: result.value }
         end
       end
