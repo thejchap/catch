@@ -4,7 +4,7 @@ module Catch
   module Availability
     module Matching
       class WriterJob < ::ActiveJob::Base
-        queue_as :default
+        queue_as :matching
 
         def perform(location_id:)
           location = ::Location.fetch location_id

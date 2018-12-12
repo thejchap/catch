@@ -24,6 +24,8 @@ gem 'rails', '5.2.1'
 gem 'redis'
 gem 'rubocop'
 gem 'sidekiq'
+gem 'wisper'
+gem 'wisper-activejob'
 gem 'wolverine'
 
 group :development, :test do
