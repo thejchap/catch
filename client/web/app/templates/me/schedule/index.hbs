@@ -2,6 +2,7 @@
 <div class="pt-md-3 pb-md-3 pr-md-4 d-flex flex-column schedule-index">
   <div class='mb-3'>
     {{#if availabilities.length}}
+    {{#if availabilities.firstObject.matches.edges.length}}
       {{ember-initials
         class="rounded-circle mb-1"
         image=availabilities.firstObject.matches.edges.firstObject.node.user.pictureUrl
@@ -10,9 +11,17 @@
         fontFamily="PT Sans, sans-serif"
       }}
     {{else}}
-    <div class="alert alert-warning">
+    <div class="mb-0 py-1 text-black-50 text-center">
       <small>
-        {{feather-icon icon='alert-triangle'}}
+        No matches yet. We'll keep looking for other climbers and notify you
+        when we've found you a partner!
+      </small>
+    </div>
+    {{/if}}
+    {{else}}
+    <div class="alert alert-warning mb-0">
+      <small>
+        {{feather-icon icon='alert-triangle' class='mr-1'}}
         You have no upcoming gym sessions! Select your available time slots on
         the calendar below
       </small>
