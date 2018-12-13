@@ -24,6 +24,10 @@ export default Route.extend(AuthenticatedRouteMixin, RouteQueryManager, {
   _loadCurrentUser() {
     return this.currentUser.load().catch(() => {
       this.session.invalidate();
+    }).then((user) => {
+      if (!user.location) {
+        this.transitionTo('welcome');
+      }
     });
   },
 

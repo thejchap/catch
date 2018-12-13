@@ -21,6 +21,7 @@ export default Component.extend({
     return active === sel;
   }),
   saveDisabled: alias('isClean'),
+  buttonText: 'Save',
   noSelection: empty('selection'),
   actions: {
     locationSelected(locationId) {

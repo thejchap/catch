@@ -21,6 +21,7 @@ export default Service.extend({
         __typename: "AvailabilityCreate",
         availability: {
           __typename: "Availability",
+          activities: [],
           startsAt,
           endsAt,
           day,

@@ -1,0 +1,17 @@
+<h3 class='mb-3 lead text-center'>
+  Hi, {{currentUser.data.firstName}}! Where do you climb?
+</h3>
+
+{{#me/location-select
+  all=model
+  selection=currentUser.data.location
+  buttonText="Next"
+  onSave=(action 'save')
+}}
+<div class="pl-2 pt-1">
+  <small class='text-muted'>
+    Don't see your gym listed?
+    <a href="#">Click here</a>
+  </small>
+</div>
+{{/me/location-select}}

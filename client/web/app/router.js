@@ -7,6 +7,10 @@ const Router = EmberRouter.extend({
 });
 
 Router.map(function() {
+  this.route('welcome', function() {
+    this.route('location');
+    this.route('activities');
+  });
   this.route('me', function() {
     this.route('schedule', function () {
       this.route('show', { path: '/:id' });

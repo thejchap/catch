@@ -1,8 +1,8 @@
 <select
-  class="form-control mb-3"
+  class="form-control"
   onchange={{action "locationSelected" value="target.value"}}
 >
-  <option disabled selected={{noSelection}}>Please select a location</option>
+  <option disabled selected={{noSelection}}>Select your gym</option>
 
   {{#each all as |location|}}
     <option
@@ -13,6 +13,9 @@
     </option>
   {{/each}}
 </select>
+{{yield}}
+<div class="mb-3">
+</div>
 {{#g-map lat=center.lat lng=center.lng disableDefaultUI=true zoom=8 as |g|}}
   {{#each all as |location|}}
     {{g.marker
@@ -32,7 +35,7 @@
       disabled={{saveDisabled}}
       {{action "save"}}
     >
-      Save
+    {{buttonText}}
     </button>
   </div>
 </div>

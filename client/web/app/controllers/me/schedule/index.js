@@ -9,9 +9,8 @@ const { reads } = computed;
 
 export default Controller.extend({
   apollo: service(),
-
+  currentUser: service(),
   me: controller(),
-
   availabilities: reads('me.model'),
 
   actions: {

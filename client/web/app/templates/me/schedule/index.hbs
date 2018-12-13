@@ -1,27 +1,38 @@
-<div class="pt-md-3 pb-md-2 pr-md-4 d-flex flex-column schedule-index">
-  <div class='time-table-wrapper bg-white border d-flex flex-column rounded
-  shadow
-    '>
+
+<div class="pt-md-3 pb-md-3 pr-md-4 d-flex flex-column schedule-index">
+  <div class='mb-3'>
+    {{#if availabilities.length}}
+      {{ember-initials
+        class="rounded-circle mb-1"
+        image=availabilities.firstObject.matches.edges.firstObject.node.user.pictureUrl
+        size=60
+        name=availabilities.firstObject.matches.edges.firstObject.node.user.firstName
+        fontFamily="PT Sans, sans-serif"
+      }}
+    {{else}}
+    <div class="alert alert-warning">
+      <small>
+        {{feather-icon icon='alert-triangle'}}
+        You have no upcoming gym sessions! Select your available time slots on
+        the calendar below
+      </small>
+    </div>
+    {{/if}}
+  </div>
+  <div class='time-table-wrapper bg-white d-flex flex-column rounded border
+  shadow-sm
+  '>
     {{#time-table
     occurrences=availabilities
     onAddOccurrence=(action 'calendarAddOccurrence')
     as |occurrence table calendar|}}
-      {{me/schedule/availability-block
-        model=occurrence
-        timeSlotHeight=calendar.timeSlotHeight
-        timeSlotDuration=calendar.timeSlotDuration
-        onUpdate=(action 'calendarUpdateOccurrence')
-        onSelect=(action 'calendarSelectOccurrence')
-        table=table}}
+    {{me/schedule/availability-block
+    model=occurrence
+    timeSlotHeight=calendar.timeSlotHeight
+    timeSlotDuration=calendar.timeSlotDuration
+    onUpdate=(action 'calendarUpdateOccurrence')
+    onSelect=(action 'calendarSelectOccurrence')
+    table=table}}
     {{/time-table}}
-  </div>
-  <div class="d-none justify-content-center pt-4 pb-3 clearfix d-md-flex">
-  <small class='text-black-50'>
-    {{feather-icon icon='check-circle' class='text-success'}}
-    All changes saved
-    <span class="mx-2"></span>
-    {{feather-icon icon='check-circle' class='text-success'}}
-    Matches updated 5 minutes ago
-  </small>
   </div>
 </div>

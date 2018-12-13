@@ -8,6 +8,7 @@ const { alias } = computed;
 export default Component.extend({
   tagName: 'ul',
   classNames: ['list-group'],
+  buttonText: 'Save',
   activeSelection: computed('selection.[]', function() {
     let arr = A();
     this.selection.forEach((item) => arr.pushObject(item));
