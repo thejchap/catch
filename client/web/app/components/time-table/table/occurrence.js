@@ -18,13 +18,6 @@ export default Component.extend({
   day: reads('model.day'),
   duration: reads('model.duration'),
   referenceElement: reads('table.referenceElement'),
-  click() {
-    if (this.isInteracting) {
-      return;
-    }
-
-    this.attrs.onSelect(this.model.content);
-  },
   endsAtLabel: computed('endsAt', function() {
     return moment().startOf('day').add(this.endsAt, 'minutes').format('ha');
   }),

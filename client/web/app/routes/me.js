@@ -37,6 +37,9 @@ export default Route.extend(AuthenticatedRouteMixin, RouteQueryManager, {
     },
     availabilityUpdated(availability) {
       this.availability.update(availability);
+    },
+    availabilityDestroyed(availability) {
+      this.availability.del(availability);
     }
   }
 });

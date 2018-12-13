@@ -38,6 +38,7 @@ module Catch
         def destroy?
           false
         end
+        alias delete? destroy?
 
         class Scope
           attr_reader :user, :scope

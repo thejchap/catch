@@ -1,0 +1,5 @@
+mutation availabilityDelete($id: ID!) {
+  availabilityDelete(input: { id: $id }) {
+    success
+  }
+}

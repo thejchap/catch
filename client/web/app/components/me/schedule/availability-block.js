@@ -7,5 +7,10 @@ export default Occurrence.extend({
   classNames: ['availability-block'],
   classNameBindings: ['hasMatches:has-matches'],
   availability: alias('model.content'),
-  hasMatches: alias('availability.matches.any')
+  hasMatches: alias('availability.matches.any'),
+  actions: {
+    destroy() {
+      this.onDestroy(this.availability);
+    }
+  }
 });

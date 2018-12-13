@@ -21,6 +21,9 @@ export default Controller.extend({
 
       this.transitionToRoute('me.schedule.show', availability.modelId);
     },
+    calendarDestroyOccurrence(attrs) {
+      next(() => this.send('availabilityDestroyed', attrs));
+    },
     calendarAddOccurrence(attrs) {
       next(() => this.send('availabilityAdded', attrs));
     },

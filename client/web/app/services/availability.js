@@ -3,6 +3,7 @@ import { getObservable } from 'ember-apollo-client';
 import { setProperties, set, getProperties } from '@ember/object';
 import availabilityCreate from "catch/models/availability/queries/availability-create";
 import availabilityUpdate from "catch/models/availability/queries/availability-update";
+import availabilityDelete from "catch/models/availability/queries/availability-delete";
 import query from "catch/models/availability/queries/my-availabilities";
 import Availability from 'catch/models/availability';
 
@@ -53,9 +54,44 @@ export default Service.extend({
     return this.proxy.mutate(opts, 'availabilityCreate.availability');
   },
 
+  del({ id }) {
+    const mutation = availabilityDelete;
+    const variables = { id };
+
+    const update = (proxy) => {
+      const data = proxy.readQuery({ query });
+      const avail = data.availabilities.findBy('id', id);
+      data.availabilities.removeObject(avail);
+      proxy.writeQuery({ query, data });
+    };
+
+    const optimisticResponse = {
+      __typename: "Mutation",
+      availabilityDelete: {
+        __typename: "AvailabilityDelete",
+        success: true
+      }
+    };
+
+    const opts = {
+      mutation,
+      variables,
+      update,
+      optimisticResponse
+    };
+
+    return this.proxy.mutate(opts, 'availabilityDelete.success');
+  },
+
   update(availability) {
     const mutation = availabilityUpdate;
-    const variables = getProperties(availability, 'day', 'startsAt', 'endsAt', 'id')
+    const variables = getProperties(
+      availability,
+      'day',
+      'startsAt',
+      'endsAt',
+      'id'
+    )
 
     const optimisticResponse = {
       __typename: "Mutation",

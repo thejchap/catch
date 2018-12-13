@@ -11,6 +11,11 @@ module Catch
         def update?
           record.user_id == user.id
         end
+
+        def destroy?
+          record.user_id == user.id
+        end
+        alias delete? destroy?
       end
     end
   end

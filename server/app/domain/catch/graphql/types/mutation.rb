@@ -6,6 +6,7 @@ module Catch
       class Mutation < Types::BaseObject
         field :availability_create, mutation: Mutations::AvailabilityCreate
         field :availability_update, mutation: Mutations::AvailabilityUpdate
+        field :availability_delete, mutation: Mutations::AvailabilityDelete
         field :me_update,           mutation: Mutations::MeUpdate
       end
     end

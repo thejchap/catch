@@ -9,5 +9,6 @@ Rails.application.routes.draw do
 
   get '/me', to: 'application#index'
   get '/me/*path', to: 'application#index'
+  get '/welcome/*path', to: 'application#index'
   root 'application#index'
 end

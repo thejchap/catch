@@ -14,6 +14,11 @@ module Catch
             write location_for(availability_id)
           end
 
+          # TODO
+          def availability_deleted(availability_id)
+            Rails.logger.info "Availability deleted #{availability_id}"
+          end
+
           def availability_created(availability_id)
             write location_for(availability_id)
           end
