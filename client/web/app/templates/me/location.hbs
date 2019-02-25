@@ -3,10 +3,16 @@
     <div class="col-md-6 offset-md-2">
       <div class="pb-1 mb-2 mt-4">
         <h3>Location</h3>
-        <small class='text-muted'>Select a gym to get matched with other
-          climbers</small>
+        <small class="text-muted">
+          Select a gym to get matched with other climbers
+        </small>
       </div>
-      {{me/location-select all=model selection=currentUser.data.location onSave=(action 'save')}}
+
+      {{me/location-select
+        all=model
+        selection=currentUser.data.location
+        onSave=(action "save")
+      }}
     </div>
   </div>
 </div>

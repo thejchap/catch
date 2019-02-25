@@ -1,7 +1,6 @@
 import Object, { computed } from '@ember/object';
 import { A } from '@ember/array';
 
-const { alias } = computed;
 const LABELS = [
   'Sun',
   'Mon',

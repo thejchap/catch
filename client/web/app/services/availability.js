@@ -1,11 +1,12 @@
 import Service, { inject as service } from '@ember/service';
-import { getObservable } from 'ember-apollo-client';
-import { setProperties, set, getProperties } from '@ember/object';
+import { set, getProperties } from '@ember/object';
 import availabilityCreate from "catch/models/availability/queries/availability-create";
 import availabilityUpdate from "catch/models/availability/queries/availability-update";
 import availabilityDelete from "catch/models/availability/queries/availability-delete";
 import query from "catch/models/availability/queries/my-availabilities";
 import Availability from 'catch/models/availability';
+
+export const POLL_INTERVAL = 1 * 1000;
 
 export default Service.extend({
   apollo: service(),
@@ -112,6 +113,7 @@ export default Service.extend({
 
   watchQuery(proxy) {
     set(this, 'proxy', proxy);
+
     return proxy.watchQuery({ query }, 'availabilities');
   }
 });

@@ -1,9 +1,7 @@
 import Component from '@ember/component';
 import $ from 'jquery';
-import { run } from '@ember/runloop';
 import { computed, set } from '@ember/object';
 import { htmlSafe } from '@ember/string';
-import interact from 'interactjs';
 
 const { reads } = computed;
 
@@ -29,28 +27,6 @@ export default Component.extend({
   },
   _setupInteractionListeners() {
     this.$('#time-table-content').click(this._contentClicked.bind(this));
-    const interactable = interact(this.$('#time-table-content')[0]);
-    this._setupDragHandler(interactable);
-  },
-  _setupDragHandler(interactable) {
-    return;
-
-    interactable.draggable({
-      ignoreFrom:   '.time-table-occurrence',
-      hold:         1000,
-      onstart:      (event) => { run(this, this._dragStart, event) },
-      onmove:       (event) => { run(this, this._dragMove,  event) },
-      onend:        (event) => { run(this, this._dragEnd,   event) }
-    });
-  },
-
-  _dragStart(event) {
-    this.attrs.onSelectTimeSlot(60, 1);
-  },
-  _dragMove(event) {
-    console.log(event);
-  },
-  _dragEnd(event) {
   },
 
   firstColWidth() {
@@ -69,6 +45,6 @@ export default Component.extend({
     const day = Math.floor(offsetX / this.dayWidth());
     const timeSlotIndex = Math.floor(offsetY / this.timeSlotHeight);
     const timeSlot = this.timeSlots.objectAt(timeSlotIndex);
-    this.attrs.onSelectTimeSlot(timeSlot.time, day);
+    this.onSelectTimeSlot(timeSlot.time, day);
   }
 });

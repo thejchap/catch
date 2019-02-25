@@ -33,9 +33,6 @@ export default Component.extend({
     },
     save() {
       this.onSave(this.activeSelection);
-    },
-    markerSelect(loc) {
-      console.log(loc);
     }
   }
 });

@@ -69,7 +69,7 @@ export default Component.extend({
   _mouseUp() {
     $(document.documentElement).css('cursor', '');
   },
-  _resizeStart(event) {
+  _resizeStart() {
     setProperties(this, {
       isInteracting: true,
       'calendar.occurrencePreview': this.model.copy()
@@ -81,8 +81,8 @@ export default Component.extend({
     const changes = { endsAt: this.model.startsAt + newDuration };
     this._updatePreview(changes);
   },
-  _resizeEnd(event) {
-    this.attrs.onUpdate(this.model.content, {
+  _resizeEnd() {
+    this.onUpdate(this.model.content, {
       endsAt: this.preview.content.endsAt
     }, false);
 
@@ -91,7 +91,7 @@ export default Component.extend({
       'calendar.occurrencePreview': null
     });
   },
-  _dragStart(event) {
+  _dragStart() {
     const $el = this.$();
     const $ref = $(this.referenceElement);
 
@@ -103,9 +103,9 @@ export default Component.extend({
       'calendar.occurrencePreview': this.model.copy()
     });
   },
-  _dragEnd(event) {
+  _dragEnd() {
     const { model, preview: { content: { startsAt, endsAt, day } } } = this
-    this.attrs.onUpdate(model.content, { startsAt, endsAt, day }, false);
+    this.onUpdate(model.content, { startsAt, endsAt, day }, false);
 
     setProperties(this, {
       isInteracting: false,
@@ -131,9 +131,10 @@ export default Component.extend({
       return;
     }
 
-    this.attrs.onUpdate(this.preview.content, attrs, true);
+    this.onUpdate(this.preview.content, attrs, true);
   },
-  _validatePreviewChanges(attrs) {
+  // TODO
+  _validatePreviewChanges() {
     return true;
   },
   _dragDayOffset(event) {

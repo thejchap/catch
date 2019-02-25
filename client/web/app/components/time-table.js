@@ -13,7 +13,7 @@ export default Component.extend({
   actions: {
     addOccurrence(startsAt, day) {
       const occurrence = this.model.createOccurrence({ startsAt, day });
-      this.attrs.onAddOccurrence(occurrence.content);
+      this.onAddOccurrence(occurrence.content);
     },
   }
 });

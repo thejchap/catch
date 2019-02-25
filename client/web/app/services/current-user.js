@@ -4,7 +4,7 @@ import { set } from '@ember/object';
 import me from './current-user/queries/me'
 import meUpdate from './current-user/queries/me-update'
 
-const { resolve, reject } = RSVP;
+const { resolve } = RSVP;
 
 export default Service.extend({
   session: service(),

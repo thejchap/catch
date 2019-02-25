@@ -3,12 +3,18 @@
     <div class="col-md-6 offset-md-2">
       <div class="pb-1 mb-2 mt-4">
         <h3>Activities</h3>
-        <small class='text-muted'>You will be matched with climbing partners based your selected
-        activities. You can change these at any time and your matches will be
-        updated automatically.</small>
+
+        <small class="text-muted">
+          You will be matched with climbing partners based your selected activities.
+          You can change these at any time and your matches will be updated automatically.
+        </small>
       </div>
 
-      {{me/activities-form all=model selection=activitySettings onSave=(action 'save')}}
+      {{me/activities-form
+        all=model
+        selection=activitySettings
+        onSave=(action "save")
+      }}
     </div>
   </div>
 </div>

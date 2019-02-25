@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import { set, computed } from '@ember/object';
+import { computed } from '@ember/object';
 import { A } from '@ember/array';
 import { compare } from '@ember/utils';
 

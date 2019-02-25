@@ -1,7 +1,6 @@
 import Route from '@ember/routing/route';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
-import Noty from 'noty';
-import { RouteQueryManager } from "ember-apollo-client";
+import { RouteQueryManager } from 'ember-apollo-client';
 import { inject as service } from '@ember/service';
 
 export default Route.extend(AuthenticatedRouteMixin, RouteQueryManager, {
@@ -40,6 +39,8 @@ export default Route.extend(AuthenticatedRouteMixin, RouteQueryManager, {
     },
     availabilityDestroyed(availability) {
       this.availability.del(availability);
+    },
+    interactionChange() {
     }
   }
 });

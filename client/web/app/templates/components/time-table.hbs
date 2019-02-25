@@ -20,13 +20,17 @@ as |day table|
   {{/each}}
 
   {{#if day.occurrencePreview}}
-    {{time-table/table/occurrence
-      class="time-table-occurrence-preview"
-      model=day.occurrencePreview
-      timeSlotHeight=timeSlotHeight
-      timeSlotDuration=timeSlotDuration
-      table=table
-    }}
+    {{#if hasBlock}}
+      {{yield day.occurrencePreview table this}}
+    {{else}}
+      {{time-table/table/occurrence
+        class="time-table-occurrence-preview"
+        model=day.occurrencePreview
+        timeSlotHeight=timeSlotHeight
+        timeSlotDuration=timeSlotDuration
+        table=table
+      }}
+    {{/if}}
   {{/if}}
 
 {{/time-table/table}}

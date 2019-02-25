@@ -27,6 +27,9 @@ export default Controller.extend({
     calendarAddOccurrence(attrs) {
       next(() => this.send('availabilityAdded', attrs));
     },
+    onInteractionChange(isInteracting) {
+      this.send('interactionChange', isInteracting);
+    },
     calendarUpdateOccurrence(availability, props, isPreview) {
       setProperties(availability, props);
 
