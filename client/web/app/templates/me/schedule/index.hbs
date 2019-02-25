@@ -2,12 +2,12 @@
 <div class="pt-md-3 pb-md-3 pr-md-4 d-flex flex-column schedule-index">
   <div class="mb-3">
     {{#if availabilities.length}}
-      {{#if availabilities.firstObject.matches.edges.length}}
+      {{#if nextMatch}}
         {{ember-initials
           class="rounded-circle mb-1"
-          image=availabilities.firstObject.matches.edges.firstObject.node.user.pictureUrl
+          image=nextMatch.user.pictureUrl
           size=60
-          name=availabilities.firstObject.matches.edges.firstObject.node.user.firstName
+          name=nextMatch.user.firstName
           fontFamily="PT Sans, sans-serif"
         }}
       {{else}}

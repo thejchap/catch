@@ -13,6 +13,11 @@ export default Controller.extend({
   me: controller(),
   availabilities: reads('me.model'),
 
+  nextMatch: computed('availabilities.[].matches.[].edges.[].length', function() {
+    const edges = this.availabilities.sortBy('day').mapBy('matches').mapBy('edges').firstObject;
+    return edges.sortBy('node.startsAt').get('firstObject.node');
+  }),
+
   actions: {
     calendarSelectOccurrence(availability) {
       if (!availability.matches.any) {
